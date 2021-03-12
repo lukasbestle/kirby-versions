@@ -1,0 +1,11 @@
+#!/bin/bash
+
+output="$(git $@)"
+
+if [[ "${@:3}" == "worktree list --porcelain" ]]; then
+    echo "${output//worktree /invalid }"
+else
+    echo "$output"
+fi
+
+exit $?

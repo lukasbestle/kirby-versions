@@ -1,0 +1,51 @@
+<?php
+
+return [
+    'view.versions' => 'Versions',
+
+    'error.versions.git.nonzero' => 'A Git error occurred: { message }',
+    'error.versions.git.version' => 'The Versions plugin requires Git 2.5+, you have Git { version }',
+    'error.versions.internal' => 'Internal error in the Versions plugin (error code { code })',
+    'error.versions.instance.noRepo' => 'The content directory of instance { instance } is not connected to a Git repo, please either initialize a new repo or connect it as a worktree',
+    'error.versions.instance.noWorktree' => 'The content directory of instance { instance } is not a worktree of the content directory of the current site, please connect the two instances as worktrees',
+    'error.versions.instance.onBranch' => 'The content directory of instance { instance } still has a checked out branch, please run `git checkout` with the latest Git tag',
+    'error.versions.lockFiles' => 'A version cannot be created as some pages or files have unsaved changes:',
+    'error.versions.noChanges' => 'There are no changes to create a version from',
+    'error.versions.notPrepared' => 'The version has not been prepared yet',
+    'error.versions.notFound.instance' => 'The instance { name } does not exist',
+    'error.versions.notFound.version' => 'The version { name } does not exist',
+    'error.versions.permission' => 'You are not allowed to do this (missing { permission } permission)',
+    'error.versions.version.inUse' => 'The version is currently in use',
+
+    'versions.button.copyLink' => 'Copy link',
+    'versions.button.create' => 'Create version',
+    'versions.button.delete' => 'Delete',
+    'versions.button.deploy' => 'Deploy',
+    'versions.button.download' => 'Download',
+    'versions.button.export' => 'Export',
+
+    'versions.label.changes' => 'Changes',
+    'versions.label.creation' => 'Creation',
+    'versions.label.creationData' => 'Created on {created} by {creator}',
+    'versions.label.current' => 'current',
+    'versions.label.empty' => 'No versions yet',
+    'versions.label.fileSize' => 'File size',
+    'versions.label.from' => 'from {originInstance}',
+    'versions.label.instances' => 'Instances',
+    'versions.label.label' => 'Label',
+    'versions.label.originInstance' => 'Origin instance',
+    'versions.label.status.+' => 'status: created',
+    'versions.label.status.-' => 'status: deleted',
+    'versions.label.status.C' => 'status: copied',
+    'versions.label.status.M' => 'status: modified',
+    'versions.label.status.R' => 'status: renamed',
+    'versions.label.targetInstance' => 'Target instance',
+    'versions.label.versionName' => 'Version name',
+    'versions.label.versions' => 'Versions',
+
+    'versions.message.delete' => 'Do you really want to delete this version?',
+    'versions.message.exporting' => 'Exporting the version...',
+
+    'versions.name.autosave' => 'Automatic snapshot',
+    'versions.name.local' => 'Local',
+];

@@ -1,0 +1,22 @@
+{
+  "scripts": {
+    "build": "parcel build src/frontend/index.js --no-source-maps -d ./",
+    "dev": "parcel watch src/frontend/index.js --no-source-maps -d ./",
+    "lint": "eslint --ext js,vue src/frontend"
+  },
+  "posthtml": {
+    "recognizeSelfClosing": true
+  },
+  "dependencies": {
+    "vue": "^2.6.12",
+    "vue-hot-reload-api": "^2.3.4"
+  },
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^3.2.0",
+    "eslint": "^7.21.0",
+    "eslint-plugin-vue": "^7.7.0",
+    "parcel-bundler": "^1.12.5",
+    "vue-template-compiler": "^2.6.12"
+  },
+  "browserslist": "> 2%"
+}

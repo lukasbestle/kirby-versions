@@ -1,0 +1,45 @@
+{
+    "name": "lukasbestle/kirby-versions",
+    "type": "kirby-plugin",
+    "description": "Versions Plugin for Kirby 3",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lukas Bestle",
+            "email": "project-kirbyversions@lukasbestle.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.3.0 <8.1.0",
+        "getkirby/cms": ">=3.5.3 <3.6.0",
+        "getkirby/composer-installer": "^1.1"
+    },
+    "extra": {
+        "installer-name": "versions",
+        "kirby-cms-path": false
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LukasBestle\\": "tests/"
+        }
+    },
+    "scripts": {
+        "analyze": [
+            "@analyze:composer",
+            "@analyze:psalm",
+            "@analyze:phpcpd",
+            "@analyze:phpmd"
+        ],
+        "analyze:composer": "composer validate --strict --no-check-version --no-check-all",
+        "analyze:phpcpd": "phpcpd --fuzzy --exclude node_modules --exclude tests --exclude vendor .",
+        "analyze:phpmd": "phpmd . ansi phpmd.xml.dist --exclude 'node_modules/*,tests/*,vendor/*'",
+        "analyze:psalm": "psalm",
+        "ci": [
+            "@fix",
+            "@analyze",
+            "@test"
+        ],
+        "fix": "php-cs-fixer fix --config .php_cs",
+        "test": "phpunit --stderr --coverage-html=tests/coverage"
+    }
+}
