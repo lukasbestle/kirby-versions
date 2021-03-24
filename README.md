@@ -119,13 +119,15 @@ git checkout $tagName
 git branch -d master
 ```
 
+**Note:** The `$tagName` variable was set at the beginning. If you run all commands in the same terminal session, you can copy-paste them 1:1 and the value of `$tagName` will be inserted automatically by your shell.
+
 ### 3. Set up a connection to other site instances (optional)
 
 Following this section will allow you to deploy your versions to other site instances (e.g. staging, production) later. This feature is completely optional.
 
 In the following steps, the "main site" is the site where you have initialized the Git repository by following the steps above. The "other sites" are the sites that you want to integrate into the process.
 
-1. Run the commands from the above section in the `content` directory of your main site to set up the repository.
+1. The Git repository in the `content` directory of your main site already needs to be set up. Please make sure to complete the setup step 2 above before you continue.
 2. Delete the `content` directories of the other sites. Make sure to keep a backup of the content in case it differs from the content of the main site.
 3. Run the following command in the `content` directory of your main site for each other site you want to set up:
 
@@ -153,7 +155,7 @@ return [
         'autodelete.count' => 20,
 
         // path to the Git binary;
-        // autodetected if not set
+        // autodetected from PHP's `$PATH` if not set
         'git.path' => '/usr/local/bin/git',
 
         // list of the site instances that can be managed from the Panel;

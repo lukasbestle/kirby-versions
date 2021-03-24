@@ -10,7 +10,7 @@ return [
     'autodelete.count' => 20,
 
     // path to the Git binary;
-    // autodetected if not set
+    // autodetected from PHP's `$PATH` if not set
     'git.path' => 'git',
 
     // list of the site instances that can be managed from the Panel;
