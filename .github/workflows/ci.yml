@@ -20,27 +20,27 @@ jobs:
 
       - name: Setup PHP cache environment
         id: ext-cache
-        uses: shivammathur/cache-extensions@bd9d592c6f1e238f2d52d30e3fcec93dbcfd0ab9 # pin@v1
+        uses: shivammathur/cache-extensions@8828d749a642ae651470bd7713c2266c82cac102 # pin@v1
         with:
           php-version: ${{ matrix.php }}
           extensions: ${{ env.extensions }}
           key: php-v1
 
       - name: Cache PHP extensions
-        uses: actions/cache@0781355a23dac32fd3bac414512f4b903437991a # pin@v2
+        uses: actions/cache@1c6fb82ebbd610035c324e764e5e74d0e82f8a60 # pin@v2
         with:
           path: ${{ steps.ext-cache.outputs.dir }}
           key: ${{ steps.ext-cache.outputs.key }}
           restore-keys: ${{ steps.ext-cache.outputs.key }}
 
       - name: Setup PHP environment
-        uses: shivammathur/setup-php@b4ce3a74beb6c6e6d3b4fd15195785bf387807a7 # pin@v2
+        uses: shivammathur/setup-php@ed52ff9a52991475b075a4c2144f7276195e8620 # pin@v2
         with:
           php-version: ${{ matrix.php }}
           extensions: ${{ env.extensions }}
           ini-values: ${{ env.ini }}
           coverage: pcov
-          tools: phpunit:9.5.2, psalm:4.6.4
+          tools: phpunit:9.5.4, psalm:4.7.1
 
       - name: Setup problem matchers
         run: |
@@ -52,7 +52,7 @@ jobs:
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
       - name: Cache dependencies
-        uses: actions/cache@0781355a23dac32fd3bac414512f4b903437991a # pin@v2
+        uses: actions/cache@1c6fb82ebbd610035c324e764e5e74d0e82f8a60 # pin@v2
         with:
           path: ${{ steps.composerCache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}
@@ -66,7 +66,7 @@ jobs:
 
       - name: Cache analysis data
         id: finishPrepare
-        uses: actions/cache@0781355a23dac32fd3bac414512f4b903437991a # pin@v2
+        uses: actions/cache@1c6fb82ebbd610035c324e764e5e74d0e82f8a60 # pin@v2
         with:
           path: ~/.cache/psalm
           key: backend-analysis-${{ matrix.php }}
@@ -80,7 +80,7 @@ jobs:
         run: psalm --output-format=github
 
       - name: Upload coverage results to Codecov
-        uses: codecov/codecov-action@fcebab03f26c7530a22baa63f06b3e0515f0c7cd # pin@v1
+        uses: codecov/codecov-action@a1ed4b322b4b38cb846afb5a0ebfa17086917d27 # pin@v1
         with:
           file: ${{ github.workspace }}/clover.xml
           flags: backend
@@ -93,7 +93,7 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-      php: "7.4" # TODO: Update to PHP 8.0 when PHPMD supports it (https://github.com/phpmd/phpmd/issues/853)
+      php: "8.0"
       extensions: mbstring
 
     steps:
@@ -102,14 +102,14 @@ jobs:
 
       - name: Setup PHP cache environment
         id: ext-cache
-        uses: shivammathur/cache-extensions@bd9d592c6f1e238f2d52d30e3fcec93dbcfd0ab9 # pin@v1
+        uses: shivammathur/cache-extensions@8828d749a642ae651470bd7713c2266c82cac102 # pin@v1
         with:
           php-version: ${{ env.php }}
           extensions: ${{ env.extensions }}
           key: php-analysis-v1
 
       - name: Cache PHP extensions
-        uses: actions/cache@0781355a23dac32fd3bac414512f4b903437991a # pin@v2
+        uses: actions/cache@1c6fb82ebbd610035c324e764e5e74d0e82f8a60 # pin@v2
         with:
           path: ${{ steps.ext-cache.outputs.dir }}
           key: ${{ steps.ext-cache.outputs.key }}
@@ -117,14 +117,14 @@ jobs:
 
       - name: Setup PHP environment
         id: finishPrepare
-        uses: shivammathur/setup-php@b4ce3a74beb6c6e6d3b4fd15195785bf387807a7 # pin@v2
+        uses: shivammathur/setup-php@ed52ff9a52991475b075a4c2144f7276195e8620 # pin@v2
         with:
           php-version: ${{ env.php }}
           extensions: ${{ env.extensions }}
           coverage: none
           tools: |
-            composer:2.0.11, composer-normalize:2.13.3, composer-require-checker:3.1.0,
-            composer-unused:0.7.5, phpcpd:6.0.3, phpmd:2.9.1
+            composer:2.0.13, composer-normalize:2.13.3, composer-require-checker:3.2.0,
+            composer-unused:0.7.5, phpcpd:6.0.3, phpmd:2.10.0
 
       - name: Validate composer.json/composer.lock
         if: always() && steps.finishPrepare.outcome == 'success'
@@ -142,7 +142,7 @@ jobs:
       - name: Cache dependencies
         id: composerCache2
         if: always() && steps.composerCache1.outcome == 'success'
-        uses: actions/cache@0781355a23dac32fd3bac414512f4b903437991a # pin@v2
+        uses: actions/cache@1c6fb82ebbd610035c324e764e5e74d0e82f8a60 # pin@v2
         with:
           path: ${{ steps.composerCache1.outputs.dir }}
           key: ${{ runner.os }}-composer-locked-${{ hashFiles('**/composer.lock') }}
@@ -182,7 +182,7 @@ jobs:
         uses: actions/setup-node@0696555e99b7a8260864ca027af4b004eea59379 # pin@v2
 
       - name: Cache npm dependencies
-        uses: actions/cache@0781355a23dac32fd3bac414512f4b903437991a # pin@v2
+        uses: actions/cache@1c6fb82ebbd610035c324e764e5e74d0e82f8a60 # pin@v2
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -192,14 +192,14 @@ jobs:
         run: npm ci
 
       - name: Setup PHP environment
-        uses: shivammathur/setup-php@b4ce3a74beb6c6e6d3b4fd15195785bf387807a7 # pin@v2
+        uses: shivammathur/setup-php@ed52ff9a52991475b075a4c2144f7276195e8620 # pin@v2
         with:
           coverage: none
-          tools: php-cs-fixer:2.18.4
+          tools: php-cs-fixer:3.0.0
 
       - name: Cache analysis data
         id: finishPrepare
-        uses: actions/cache@0781355a23dac32fd3bac414512f4b903437991a # pin@v2
+        uses: actions/cache@1c6fb82ebbd610035c324e764e5e74d0e82f8a60 # pin@v2
         with:
           path: ~/.php-cs-fixer
           key: coding-style
@@ -226,7 +226,7 @@ jobs:
           PHP_CS_FIXER_IGNORE_ENV: 1
         # Use the --dry-run flag in push builds to get a failed CI status
         run: >
-          php-cs-fixer fix --diff --diff-format=udiff
+          php-cs-fixer fix --diff
           ${{ github.event_name != 'pull_request' && '--dry-run' || '' }}
 
       - name: Create code suggestions from the coding style changes (on PR only)
