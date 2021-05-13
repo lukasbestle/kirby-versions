@@ -1,6 +1,6 @@
 # Versions for Kirby 3
 
-[![Kirby 3.5.4+](https://img.shields.io/badge/Kirby-3.5.4%2B-green)](https://getkirby.com)
+[![Kirby 3.5.5+](https://img.shields.io/badge/Kirby-3.5.5%2B-green)](https://getkirby.com)
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
 [![Release](https://img.shields.io/github/v/release/lukasbestle/kirby-versions)](https://github.com/lukasbestle/kirby-versions/releases/latest)
 [![CI Status](https://img.shields.io/github/workflow/status/lukasbestle/kirby-versions/ci?label=CI)](https://github.com/lukasbestle/kirby-versions/actions?query=workflow%3ACI)
@@ -48,7 +48,7 @@
 
 ## Requirements
 
-- Kirby 3.5.4+
+- Kirby 3.5.5+
 - Git 2.5+ (ideally newer for better reliability)
 
 **Note:** Deploying versions to multiple sites currently only works if all sites are hosted on the same server (i.e. if Kirby has access to the file system of all sites).

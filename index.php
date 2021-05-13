@@ -21,7 +21,7 @@ $kirbyVersion = App::version();
 if (
     $kirbyVersion !== null &&
     (
-        version_compare($kirbyVersion, '3.5.3', '<') === true ||
+        version_compare($kirbyVersion, '3.5.5', '<') === true ||
         version_compare($kirbyVersion, '3.6.0-alpha', '>=') === true
     )
 ) {
