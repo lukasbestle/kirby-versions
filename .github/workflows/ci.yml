@@ -77,7 +77,7 @@ jobs:
 
       - name: Statically analyze using Psalm
         if: always() && steps.finishPrepare.outcome == 'success'
-        run: psalm --output-format=github
+        run: psalm --output-format=github --php-version=${{ matrix.php }}
 
       - name: Upload coverage results to Codecov
         uses: codecov/codecov-action@a1ed4b322b4b38cb846afb5a0ebfa17086917d27 # pin@v1
@@ -167,7 +167,7 @@ jobs:
 
       - name: Statically analyze using PHPMD
         if: always() && steps.composerInstall.outcome == 'success'
-        run: phpmd . ansi phpmd.xml.dist --exclude 'tests/*,vendor/*'
+        run: phpmd . github phpmd.xml.dist --exclude 'tests/*,vendor/*'
 
   coding-style:
     name: Coding Style & Frontend Analysis
