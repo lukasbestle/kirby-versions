@@ -1,40 +1,672 @@
-parcelRequire=function(e,r,t,n){var i,o="function"==typeof parcelRequire&&parcelRequire,u="function"==typeof require&&require;function f(t,n){if(!r[t]){if(!e[t]){var i="function"==typeof parcelRequire&&parcelRequire;if(!n&&i)return i(t,!0);if(o)return o(t,!0);if(u&&"string"==typeof t)return u(t);var c=new Error("Cannot find module '"+t+"'");throw c.code="MODULE_NOT_FOUND",c}p.resolve=function(r){return e[t][1][r]||r},p.cache={};var l=r[t]=new f.Module(t);e[t][0].call(l.exports,p,l,l.exports,this)}return r[t].exports;function p(e){return f(p.resolve(e))}}f.isParcelRequire=!0,f.Module=function(e){this.id=e,this.bundle=f,this.exports={}},f.modules=e,f.cache=r,f.parent=o,f.register=function(r,t){e[r]=[function(e,r){r.exports=t},{}]};for(var c=0;c<t.length;c++)try{f(t[c])}catch(e){i||(i=e)}if(t.length){var l=f(t[t.length-1]);"object"==typeof exports&&"undefined"!=typeof module?module.exports=l:"function"==typeof define&&define.amd?define(function(){return l}):n&&(this[n]=l)}if(parcelRequire=f,i)throw i;return f}({"FG4G":[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e={props:{changes:Object}};exports.default=e;
-(function(){var t=exports.default||module.exports;"function"==typeof t&&(t=t.options),Object.assign(t,{render:function(){var t=this,s=t.$createElement,e=t._self._c||s;return e("ul",{staticClass:"lbvs-changes"},t._l(t.changes,function(s,n){return e("li",{key:n},[e("span",{attrs:{"data-status":s,title:t.$t("versions.label.status."+s)}},[t._v(" "+t._s(s)+" ")]),t._v(" "+t._s(n)+" ")])}),0)},staticRenderFns:[],_compiled:!0,_scopeId:null,functional:void 0});})();
-},{}],"P5xL":[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e={data:()=>({error:{message:null,details:{lockedModels:{}}}}),methods:{open(e){this.error=e,this.$refs.dialog.open()}}};exports.default=e;
-(function(){var e=exports.default||module.exports;"function"==typeof e&&(e=e.options),Object.assign(e,{render:function(){var e=this,s=e.$createElement,t=e._self._c||s;return t("k-dialog",{ref:"dialog",staticClass:"lbvs-create-error-dialog",attrs:{"cancel-button":e.$t("close"),"submit-button":!1}},[t("p",{staticClass:"lbvs-create-error-dialog-message"},[e._v(" "+e._s(e.error.message)+" ")]),e._v(" "),t("ul",{staticClass:"lbvs-create-error-dialog-list"},e._l(e.error.details.lockedModels,function(s,r){return t("li",{key:r},[e._v(" "+e._s(r)+" "),t("span",[e._v("("+e._s(s.join(", "))+")")])])}),0)])},staticRenderFns:[],_compiled:!0,_scopeId:null,functional:void 0});})();
-},{}],"BOz6":[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e={data:()=>({instance:null,inProgress:!1,stagedChanges:{}}),computed:{fields(){return{label:{autofocus:!0,icon:"title",label:this.$t("versions.label.label"),type:"text"}}}},methods:{async onSubmit(){if(!0!==this.inProgress)try{this.inProgress=!0;let s=this.$refs.form.value.label;if(!s)throw this.$t("field.required");await this.$store.dispatch({type:"versions/createVersion",instance:this.instance,label:s}),this.$store.dispatch("notification/success",":)"),this.$refs.dialog.close()}catch(e){this.$refs.dialog.error(e.message||e)}finally{this.inProgress=!1}},async open(e){this.instance=e;try{this.stagedChanges=await this.$store.dispatch({type:"versions/prepareVersionCreation",instance:this.instance})}catch(s){if("error.versions.lockFiles"===s.key)return this.$refs.errorDialog.open(s);throw s}this.$refs.dialog.open()}}};exports.default=e;
-(function(){var e=exports.default||module.exports;"function"==typeof e&&(e=e.options),Object.assign(e,{render:function(){var e=this,t=e.$createElement,s=e._self._c||t;return s("div",[s("k-dialog",{ref:"dialog",attrs:{size:"large","submit-button":e.$t("versions.button.create"),theme:"positive"},on:{submit:e.onSubmit}},[s("k-form",{ref:"form",attrs:{fields:e.fields},on:{submit:e.onSubmit},scopedSlots:e._u([{key:"header",fn:function(){return[s("k-field",{staticClass:"lbvs-create-changes",attrs:{label:e.$t("versions.label.changes")}},[s("lbvs-changes",{attrs:{changes:e.stagedChanges}})],1)]},proxy:!0}])})],1),e._v(" "),s("lbvs-create-error-dialog",{ref:"errorDialog"})],1)},staticRenderFns:[],_compiled:!0,_scopeId:null,functional:void 0});})();
-},{}],"ytRD":[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var s={data:()=>({inProgress:!1,version:null}),methods:{async onSubmit(){if(!0!==this.inProgress)try{this.inProgress=!0,await this.$store.dispatch({type:"versions/deleteVersion",version:this.version.name}),this.$store.dispatch("notification/success",":)"),this.$refs.dialog.close()}catch(s){this.$refs.dialog.error(s.message||s)}finally{this.inProgress=!1}},open(s){this.version=s,this.$refs.dialog.open()}}};exports.default=s;
-(function(){var e=exports.default||module.exports;"function"==typeof e&&(e=e.options),Object.assign(e,{render:function(){var e=this,t=e.$createElement,s=e._self._c||t;return s("k-dialog",{ref:"dialog",staticClass:"lbvs-version-delete-dialog lbvs-version-dialog",attrs:{icon:"trash","submit-button":e.$t("versions.button.delete"),theme:"negative"},on:{submit:e.onSubmit}},[e.version?s("lbvs-version",{attrs:{version:e.version}}):e._e(),e._v(" "),s("p",[e._v(e._s(e.$t("versions.message.delete")))])],1)},staticRenderFns:[],_compiled:!0,_scopeId:null,functional:void 0});})();
-},{}],"O9Nh":[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e={data:()=>({inProgress:!1,version:null}),computed:{fields(){let e=this.$store.getters["versions/currentInstance"],s=Object.values(this.$store.state.versions.data.instances).map(e=>({text:e.name,value:e.name}));return{instance:{disabled:s.length<=1,empty:!1,icon:"box",label:this.$t("versions.label.targetInstance"),options:s,placeholder:e.name,type:"select",value:e.name}}}},methods:{async onSubmit(){if(!0!==this.inProgress)try{this.inProgress=!0;let s=this.$refs.form.value.instance||this.$store.getters["versions/currentInstance"].name;await this.$store.dispatch({type:"versions/deployVersion",version:this.version.name,instance:s}),this.$store.dispatch("notification/success",":)"),this.$refs.dialog.close()}catch(e){this.$refs.dialog.error(e.message||e)}finally{this.inProgress=!1}},open(e){this.version=e,this.$refs.dialog.open()}}};exports.default=e;
-(function(){var t=exports.default||module.exports;"function"==typeof t&&(t=t.options),Object.assign(t,{render:function(){var t=this,e=t.$createElement,o=t._self._c||e;return o("k-dialog",{ref:"dialog",staticClass:"lbvs-version-dialog",attrs:{"submit-button":t.$t("versions.button.deploy"),theme:"positive"},on:{submit:t.onSubmit}},[t.version?o("lbvs-version",{attrs:{version:t.version}}):t._e(),t._v(" "),o("k-form",{ref:"form",attrs:{fields:t.fields},on:{submit:t.onSubmit}})],1)},staticRenderFns:[],_compiled:!0,_scopeId:null,functional:void 0});})();
-},{}],"bZDy":[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var t={data:()=>({data:null,version:{}}),computed:{details(){return this.data?[{title:this.$t("versions.label.fileSize"),value:this.data.filesize}]:[]},supportsClipboard(){try{return window.navigator.clipboard.writeText,!0}catch(t){return!1}}},methods:{async copyToClipboard(){await window.navigator.clipboard.writeText(this.data.url),this.$store.dispatch("notification/success",":)")},download(){window.location=this.data.url,this.$store.dispatch("notification/success",":)")},async open(t){this.data=null,this.version=t,this.$refs.dialog.open();let i=await this.$store.dispatch({type:"versions/exportVersion",version:this.version.name});t===this.version&&(this.data=i)}}};exports.default=t;
-(function(){var o=exports.default||module.exports;"function"==typeof o&&(o=o.options),Object.assign(o,{render:function(){var o=this,t=o.$createElement,s=o._self._c||t;return s("k-dialog",{ref:"dialog",staticClass:"lbvs-version-dialog",attrs:{"cancel-button":o.$t(o.data?"close":"cancel"),"submit-button":!1}},[o.version?s("lbvs-version",{attrs:{details:o.details,version:o.version}}):o._e(),o._v(" "),o.data?s("k-button-group",[s("k-button",{attrs:{icon:"download"},on:{click:o.download}},[o._v(" "+o._s(o.$t("versions.button.download"))+" ")]),o._v(" "),s("k-button",{attrs:{icon:"copy",disabled:!o.supportsClipboard},on:{click:o.copyToClipboard}},[o._v(" "+o._s(o.$t("versions.button.copyLink"))+" ")])],1):s("p",[o._v(" "+o._s(o.$t("versions.message.exporting"))+" ")])],1)},staticRenderFns:[],_compiled:!0,_scopeId:null,functional:void 0});})();
-},{}],"kxM1":[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e={props:{inline:Boolean,instance:Object},computed:{element(){return this.inline?"span":"strong"}}};exports.default=e;
-(function(){var t=exports.default||module.exports;"function"==typeof t&&(t=t.options),Object.assign(t,{render:function(){var t=this.$createElement;return(this._self._c||t)(this.element,{tag:"component",staticClass:"lbvs-instance-name",style:{backgroundColor:this.instance.color}},[this._v(" "+this._s(this.instance.name)+" ")])},staticRenderFns:[],_compiled:!0,_scopeId:null,functional:void 0});})();
-},{}],"iR3R":[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e={computed:{canCreateVersion(){return!0===this.$permissions["lukasbestle.versions"].create&&Object.keys(this.currentChanges).length>0},currentChanges(){return this.$store.getters["versions/currentInstance"].changes}},methods:{onCreate(){let e=this.$store.getters["versions/currentInstance"].name;return this.$refs.createDialog.open(e)}}};exports.default=e;
-(function(){var s=exports.default||module.exports;"function"==typeof s&&(s=s.options),Object.assign(s,{render:function(){var s=this,e=s.$createElement,t=s._self._c||e;return t("div",{staticClass:"lbvs-status"},[t("k-view",[t("k-grid",[t("k-column",{attrs:{width:"1/3"}},[t("header",{staticClass:"k-section-header"},[t("k-headline",[s._v(" "+s._s(s.$t("versions.label.instances"))+" ")])],1),s._v(" "),t("ul",{staticClass:"lbvs-status-instances"},s._l(s.$store.state.versions.data.instances,function(e){return t("li",{key:e.name,class:{current:e.isCurrent}},[t("lbvs-instance-name",{attrs:{instance:e}}),s._v(" "),e.isCurrent?t("span",{staticClass:"lbvs-status-current"},[s._v(" "+s._s(s.$t("versions.label.current"))+" ")]):s._e(),s._v(" "),e.version?t("lbvs-version",{attrs:{version:{name:e.version,label:e.versionLabel}}}):s._e()],1)}),0)]),s._v(" "),t("k-column",{staticClass:"lbvs-status-changes",attrs:{width:"2/3"}},[t("header",{staticClass:"k-section-header"},[t("k-headline",[s._v(" "+s._s(s.$t("versions.label.changes"))+" ")]),s._v(" "),t("k-button-group",[t("k-button",{attrs:{icon:"add",disabled:!1===s.canCreateVersion},on:{click:s.onCreate}},[s._v(" "+s._s(s.$t("versions.button.create"))+" ")])],1)],1),s._v(" "),t("lbvs-changes",{attrs:{changes:s.currentChanges}})],1)],1)],1),s._v(" "),t("lbvs-create-dialog",{ref:"createDialog"})],1)},staticRenderFns:[],_compiled:!0,_scopeId:null,functional:void 0});})();
-},{}],"OuAD":[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e={props:{details:{type:Array,default:()=>[]},instances:Boolean,version:Object},computed:{mergedDetails(){return[{title:this.$t("versions.label.versionName"),value:this.version.name},...this.details].filter(e=>e.value)}}};exports.default=e;
-(function(){var e=exports.default||module.exports;"function"==typeof e&&(e=e.options),Object.assign(e,{render:function(){var e=this,t=e.$createElement,s=e._self._c||t;return s("div",{staticClass:"lbvs-version"},[s("span",{staticClass:"lbvs-version-header"},[s("strong",[e._v(e._s(e.version.label))]),e._v(" "),e.instances?e._l(e.version.instances,function(t){return s("lbvs-instance-name",{key:t,attrs:{inline:!0,instance:e.$store.state.versions.data.instances[t]}})}):e._e()],2),e._v(" "),s("dl",{staticClass:"lbvs-version-details"},[e._l(e.mergedDetails,function(t){return[s("dt",{key:t.title,staticClass:"k-offscreen"},[e._v(" "+e._s(t.title)+": ")]),e._v(" "),s("dd",{key:t.title,attrs:{title:t.title}},[e._v(" "+e._s(t.value)+" ")])]})],2)])},staticRenderFns:[],_compiled:!0,_scopeId:null,functional:void 0});})();
-},{}],"iyzB":[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e={computed:{items(){return Object.values(this.$store.state.versions.data.versions)}},methods:{onOption(e,t){return this.$refs[e+"Dialog"].open(t)},options(e){let t=this.$permissions["lukasbestle.versions"];return[{click:"export",disabled:!0!==t.export,icon:"download",text:this.$t("versions.button.export")},{click:"deploy",disabled:!0!==t.deploy,icon:"wand",text:this.$t("versions.button.deploy")},{click:"delete",disabled:!0!==t.delete||e.instances.length>0,icon:"trash",text:this.$t("versions.button.delete")}]},versionDetails(e){return[{title:this.$t("versions.label.creation"),value:this.versionDetailsToString("creationData",{created:e.created?this.$library.dayjs.unix(e.created).format("YYYY-MM-DD HH:mm"):"?",creator:e.creatorName||e.creatorEmail||"?"})},{title:this.$t("versions.label.originInstance"),value:this.versionDetailsToString("from",{originInstance:e.originInstance||"?"})}]},versionDetailsToString(e,t){return!0===Object.values(t).every(e=>"?"===e)?null:this.$t("versions.label."+e,t)}}};exports.default=e;
-(function(){var e=exports.default||module.exports;"function"==typeof e&&(e=e.options),Object.assign(e,{render:function(){var e=this,t=e.$createElement,s=e._self._c||t;return s("div",{staticClass:"lbvs-versions"},[s("k-view",[s("header",{staticClass:"k-section-header"},[s("k-headline",[e._v(" "+e._s(e.$t("versions.label.versions"))+" ")])],1),e._v(" "),e.items.length?s("k-list",e._l(e.items,function(t,i){return s("k-list-item",e._b({key:i,attrs:{image:!0,options:e.options(t)},on:{action:function(s){return e.onOption(s,t)}},scopedSlots:e._u([{key:"image",fn:function(){return[e._v(" "+e._s(i+1)+" ")]},proxy:!0}],null,!0)},"k-list-item",t,!1),[e._v(" "),s("lbvs-version",{attrs:{details:e.versionDetails(t),instances:!0,version:t}})],1)}),1):s("k-empty",{attrs:{layout:"cards"}},[e._v(" "+e._s(e.$t("versions.label.empty"))+" ")])],1),e._v(" "),s("lbvs-export-dialog",{ref:"exportDialog"}),e._v(" "),s("lbvs-deploy-dialog",{ref:"deployDialog"}),e._v(" "),s("lbvs-delete-dialog",{ref:"deleteDialog"})],1)},staticRenderFns:[],_compiled:!0,_scopeId:null,functional:void 0});})();
-},{}],"vKFU":[function(require,module,exports) {
-
-},{}],"q4Jg":[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var s={data:()=>({isLoading:!0}),async mounted(){!0!==this.$permissions["lukasbestle.versions"].access&&this.$go("/");try{this.isLoading=!0,this.$store.dispatch("title",this.$t("view.versions")),await this.$store.dispatch("versions/load")}finally{this.isLoading=!1}}};exports.default=s;
-(function(){var s=exports.default||module.exports;"function"==typeof s&&(s=s.options),Object.assign(s,{render:function(){var s=this.$createElement,t=this._self._c||s;return t("div",{staticClass:"lbvs-view"},[this.isLoading?t("k-loader"):[t("lbvs-status"),this._v(" "),t("lbvs-versions")]],2)},staticRenderFns:[],_compiled:!0,_scopeId:null,functional:void 0});})();
-},{"../index.css":"vKFU"}],"iz0v":[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e=e=>({namespaced:!0,state:{data:{instances:{},versions:{}}},getters:{currentInstance:e=>Object.values(e.data.instances).find(e=>e.isCurrent)},mutations:{SET_DATA(e,{instances:s,versions:a}){e.data.instances=s,e.data.versions=a}},actions:{async load({commit:s}){s("SET_DATA",await e.$api.get("versions"))},prepareVersionCreation:async(s,{instance:a})=>await e.$api.post("versions/prepareCreation",{instance:a}),async createVersion({commit:s},{instance:a,label:n}){s("SET_DATA",await e.$api.post("versions/create",{instance:a,label:n}))},async deleteVersion({commit:s},{version:a}){s("SET_DATA",await e.$api.delete("versions/versions/"+a))},async deployVersion({commit:s},{instance:a,version:n}){s("SET_DATA",await e.$api.post("versions/versions/"+n+"/deploy",{instance:a}))},exportVersion:async(s,{version:a})=>await e.$api.post("versions/versions/"+a+"/export")}});exports.default=e;
-},{}],"Focm":[function(require,module,exports) {
-"use strict";var e=d(require("./components/Misc/Changes.vue")),s=d(require("./components/Dialogs/CreateErrorDialog.vue")),o=d(require("./components/Dialogs/CreateDialog.vue")),r=d(require("./components/Dialogs/DeleteDialog.vue")),l=d(require("./components/Dialogs/DeployDialog.vue")),t=d(require("./components/Dialogs/ExportDialog.vue")),i=d(require("./components/Misc/InstanceName.vue")),n=d(require("./components/Status.vue")),a=d(require("./components/Misc/Version.vue")),u=d(require("./components/Versions.vue")),v=d(require("./components/View.vue")),c=d(require("./store.js"));function d(e){return e&&e.__esModule?e:{default:e}}panel.plugin("lukasbestle/versions",{components:{"lbvs-changes":e.default,"lbvs-create-error-dialog":s.default,"lbvs-create-dialog":o.default,"lbvs-delete-dialog":r.default,"lbvs-deploy-dialog":l.default,"lbvs-export-dialog":t.default,"lbvs-instance-name":i.default,"lbvs-status":n.default,"lbvs-version":a.default,"lbvs-versions":u.default},views:{versions:{component:v.default,icon:"layers",menu:e=>!0===e.$permissions["lukasbestle.versions"].access||"disabled"}},created(e){e.$store.registerModule("versions",(0,c.default)(e))}});
-},{"./components/Misc/Changes.vue":"FG4G","./components/Dialogs/CreateErrorDialog.vue":"P5xL","./components/Dialogs/CreateDialog.vue":"BOz6","./components/Dialogs/DeleteDialog.vue":"ytRD","./components/Dialogs/DeployDialog.vue":"O9Nh","./components/Dialogs/ExportDialog.vue":"bZDy","./components/Misc/InstanceName.vue":"kxM1","./components/Status.vue":"iR3R","./components/Misc/Version.vue":"OuAD","./components/Versions.vue":"iyzB","./components/View.vue":"q4Jg","./store.js":"iz0v"}]},{},["Focm"], null)
+(function() {
+  "use strict";
+  var render$a = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("ul", { staticClass: "lbvs-changes" }, _vm._l(_vm.changes, function(status, path) {
+      return _c("li", { key: path }, [_c("span", { attrs: { "data-status": status, "title": _vm.$t("versions.label.status." + status) } }, [_vm._v(" " + _vm._s(status) + " ")]), _vm._v(" " + _vm._s(path) + " ")]);
+    }), 0);
+  };
+  var staticRenderFns$a = [];
+  var Changes_vue_vue_type_style_index_0_lang = '\n.lbvs-changes {\n  font-family: var(--font-family-mono);\n}\n.lbvs-changes li {\n  padding-left: 1.2em;\n  position: relative;\n}\n.lbvs-changes li span {\n  position: absolute;\n  left: 0;\n\n  font-weight: bold;\n}\n.lbvs-changes li span[data-status="+"],\n.lbvs-changes li span[data-status="C"] {\n  color: var(--color-positive);\n}\n.lbvs-changes li span[data-status="-"] {\n  color: var(--color-negative);\n}\n.lbvs-changes li span[data-status="M"],\n.lbvs-changes li span[data-status="R"] {\n  color: var(--color-notice);\n}\n';
+  function normalizeComponent(scriptExports, render2, staticRenderFns2, functionalTemplate, injectStyles2, scopeId, moduleIdentifier, shadowMode) {
+    var options = typeof scriptExports === "function" ? scriptExports.options : scriptExports;
+    if (render2) {
+      options.render = render2;
+      options.staticRenderFns = staticRenderFns2;
+      options._compiled = true;
+    }
+    if (functionalTemplate) {
+      options.functional = true;
+    }
+    if (scopeId) {
+      options._scopeId = "data-v-" + scopeId;
+    }
+    var hook;
+    if (moduleIdentifier) {
+      hook = function(context) {
+        context = context || this.$vnode && this.$vnode.ssrContext || this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext;
+        if (!context && typeof __VUE_SSR_CONTEXT__ !== "undefined") {
+          context = __VUE_SSR_CONTEXT__;
+        }
+        if (injectStyles2) {
+          injectStyles2.call(this, context);
+        }
+        if (context && context._registeredComponents) {
+          context._registeredComponents.add(moduleIdentifier);
+        }
+      };
+      options._ssrRegister = hook;
+    } else if (injectStyles2) {
+      hook = shadowMode ? function() {
+        injectStyles2.call(this, (options.functional ? this.parent : this).$root.$options.shadowRoot);
+      } : injectStyles2;
+    }
+    if (hook) {
+      if (options.functional) {
+        options._injectStyles = hook;
+        var originalRender = options.render;
+        options.render = function renderWithStyleInjection(h, context) {
+          hook.call(context);
+          return originalRender(h, context);
+        };
+      } else {
+        var existing = options.beforeCreate;
+        options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
+      }
+    }
+    return {
+      exports: scriptExports,
+      options
+    };
+  }
+  const script$a = {
+    props: {
+      changes: Object
+    }
+  };
+  const __cssModules$a = {};
+  var __component__$a = /* @__PURE__ */ normalizeComponent(script$a, render$a, staticRenderFns$a, false, injectStyles$a, null, null, null);
+  function injectStyles$a(context) {
+    for (let o in __cssModules$a) {
+      this[o] = __cssModules$a[o];
+    }
+  }
+  var Changes = /* @__PURE__ */ function() {
+    return __component__$a.exports;
+  }();
+  var render$9 = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("k-dialog", { ref: "dialog", staticClass: "lbvs-create-error-dialog", attrs: { "cancel-button": _vm.$t("close"), "submit-button": false } }, [_c("p", { staticClass: "lbvs-create-error-dialog-message" }, [_vm._v(" " + _vm._s(_vm.error.message) + " ")]), _c("ul", { staticClass: "lbvs-create-error-dialog-list" }, _vm._l(_vm.error.details.lockedModels, function(users, model) {
+      return _c("li", { key: model }, [_vm._v(" " + _vm._s(model) + " "), _c("span", [_vm._v("(" + _vm._s(users.join(", ")) + ")")])]);
+    }), 0)]);
+  };
+  var staticRenderFns$9 = [];
+  var CreateErrorDialog_vue_vue_type_style_index_0_lang = "\n.lbvs-create-error-dialog {\n  line-height: 1.5;\n}\n.lbvs-create-error-dialog-message {\n  margin-bottom: 1rem;\n\n  color: var(--color-negative);\n}\n.lbvs-create-error-dialog-list li {\n  margin-left: 1.2rem;\n\n  list-style: disc;\n}\n.lbvs-create-error-dialog-list span {\n  color: var(--color-text-light);\n}\n";
+  const script$9 = {
+    data() {
+      return {
+        error: {
+          message: null,
+          details: {
+            lockedModels: {}
+          }
+        }
+      };
+    },
+    methods: {
+      open(error) {
+        this.error = error;
+        this.$refs.dialog.open();
+      }
+    }
+  };
+  const __cssModules$9 = {};
+  var __component__$9 = /* @__PURE__ */ normalizeComponent(script$9, render$9, staticRenderFns$9, false, injectStyles$9, null, null, null);
+  function injectStyles$9(context) {
+    for (let o in __cssModules$9) {
+      this[o] = __cssModules$9[o];
+    }
+  }
+  var CreateErrorDialog = /* @__PURE__ */ function() {
+    return __component__$9.exports;
+  }();
+  var render$8 = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("div", [_c("k-dialog", { ref: "dialog", attrs: { "size": "large", "submit-button": _vm.$t("versions.button.create"), "theme": "positive" }, on: { "submit": _vm.onSubmit } }, [_c("k-form", { ref: "form", attrs: { "fields": _vm.fields }, on: { "submit": _vm.onSubmit }, scopedSlots: _vm._u([{ key: "header", fn: function() {
+      return [_c("k-field", { staticClass: "lbvs-create-changes", attrs: { "label": _vm.$t("versions.label.changes") } }, [_c("lbvs-changes", { attrs: { "changes": _vm.stagedChanges } })], 1)];
+    }, proxy: true }]) })], 1), _c("lbvs-create-error-dialog", { ref: "errorDialog" })], 1);
+  };
+  var staticRenderFns$8 = [];
+  var CreateDialog_vue_vue_type_style_index_0_lang = "\n.lbvs-create-changes {\n  margin-bottom: 2.25rem;\n}\n";
+  const script$8 = {
+    data() {
+      return {
+        instance: null,
+        inProgress: false,
+        stagedChanges: {}
+      };
+    },
+    computed: {
+      fields() {
+        return {
+          label: {
+            autofocus: true,
+            icon: "title",
+            label: this.$t("versions.label.label"),
+            type: "text"
+          }
+        };
+      }
+    },
+    methods: {
+      async onSubmit() {
+        if (this.inProgress === true) {
+          return;
+        }
+        try {
+          this.inProgress = true;
+          let label = this.$refs.form.value.label;
+          if (!label) {
+            throw this.$t("field.required");
+          }
+          await this.$store.dispatch({
+            type: "versions/createVersion",
+            instance: this.instance,
+            label
+          });
+          this.$store.dispatch("notification/success", ":)");
+          this.$refs.dialog.close();
+        } catch (e) {
+          this.$refs.dialog.error(e.message || e);
+        } finally {
+          this.inProgress = false;
+        }
+      },
+      async open(instance) {
+        this.instance = instance;
+        try {
+          this.stagedChanges = await this.$store.dispatch({
+            type: "versions/prepareVersionCreation",
+            instance: this.instance
+          });
+        } catch (e) {
+          if (e.key === "error.versions.lockFiles") {
+            return this.$refs.errorDialog.open(e);
+          }
+          throw e;
+        }
+        this.$refs.dialog.open();
+      }
+    }
+  };
+  const __cssModules$8 = {};
+  var __component__$8 = /* @__PURE__ */ normalizeComponent(script$8, render$8, staticRenderFns$8, false, injectStyles$8, null, null, null);
+  function injectStyles$8(context) {
+    for (let o in __cssModules$8) {
+      this[o] = __cssModules$8[o];
+    }
+  }
+  var CreateDialog = /* @__PURE__ */ function() {
+    return __component__$8.exports;
+  }();
+  var render$7 = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("k-dialog", { ref: "dialog", staticClass: "lbvs-version-dialog lbvs-version-delete-dialog", attrs: { "icon": "trash", "submit-button": _vm.$t("versions.button.delete"), "theme": "negative" }, on: { "submit": _vm.onSubmit } }, [_vm.version ? _c("lbvs-version", { attrs: { "version": _vm.version } }) : _vm._e(), _c("p", [_vm._v(_vm._s(_vm.$t("versions.message.delete")))])], 1);
+  };
+  var staticRenderFns$7 = [];
+  var DeleteDialog_vue_vue_type_style_index_0_lang = "\n.lbvs-version-delete-dialog {\n  line-height: 1.5;\n}\n";
+  const script$7 = {
+    data() {
+      return {
+        inProgress: false,
+        version: null
+      };
+    },
+    methods: {
+      async onSubmit() {
+        if (this.inProgress === true) {
+          return;
+        }
+        try {
+          this.inProgress = true;
+          await this.$store.dispatch({
+            type: "versions/deleteVersion",
+            version: this.version.name
+          });
+          this.$store.dispatch("notification/success", ":)");
+          this.$refs.dialog.close();
+        } catch (e) {
+          this.$refs.dialog.error(e.message || e);
+        } finally {
+          this.inProgress = false;
+        }
+      },
+      open(version) {
+        this.version = version;
+        this.$refs.dialog.open();
+      }
+    }
+  };
+  const __cssModules$7 = {};
+  var __component__$7 = /* @__PURE__ */ normalizeComponent(script$7, render$7, staticRenderFns$7, false, injectStyles$7, null, null, null);
+  function injectStyles$7(context) {
+    for (let o in __cssModules$7) {
+      this[o] = __cssModules$7[o];
+    }
+  }
+  var DeleteDialog = /* @__PURE__ */ function() {
+    return __component__$7.exports;
+  }();
+  var render$6 = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("k-dialog", { ref: "dialog", staticClass: "lbvs-version-dialog", attrs: { "submit-button": _vm.$t("versions.button.deploy"), "theme": "positive" }, on: { "submit": _vm.onSubmit } }, [_vm.version ? _c("lbvs-version", { attrs: { "version": _vm.version } }) : _vm._e(), _c("k-form", { ref: "form", attrs: { "fields": _vm.fields }, on: { "submit": _vm.onSubmit } })], 1);
+  };
+  var staticRenderFns$6 = [];
+  const script$6 = {
+    data() {
+      return {
+        inProgress: false,
+        version: null
+      };
+    },
+    computed: {
+      fields() {
+        let currentInstance = this.$store.getters["versions/currentInstance"];
+        let options = Object.values(this.$store.state.versions.data.instances).map((instance) => ({ text: instance.name, value: instance.name }));
+        return {
+          instance: {
+            disabled: options.length <= 1,
+            empty: false,
+            icon: "box",
+            label: this.$t("versions.label.targetInstance"),
+            options,
+            placeholder: currentInstance.name,
+            type: "select",
+            value: currentInstance.name
+          }
+        };
+      }
+    },
+    methods: {
+      async onSubmit() {
+        if (this.inProgress === true) {
+          return;
+        }
+        try {
+          this.inProgress = true;
+          let instance = this.$refs.form.value.instance || this.$store.getters["versions/currentInstance"].name;
+          await this.$store.dispatch({
+            type: "versions/deployVersion",
+            version: this.version.name,
+            instance
+          });
+          this.$store.dispatch("notification/success", ":)");
+          this.$refs.dialog.close();
+        } catch (e) {
+          this.$refs.dialog.error(e.message || e);
+        } finally {
+          this.inProgress = false;
+        }
+      },
+      open(version) {
+        this.version = version;
+        this.$refs.dialog.open();
+      }
+    }
+  };
+  const __cssModules$6 = {};
+  var __component__$6 = /* @__PURE__ */ normalizeComponent(script$6, render$6, staticRenderFns$6, false, injectStyles$6, null, null, null);
+  function injectStyles$6(context) {
+    for (let o in __cssModules$6) {
+      this[o] = __cssModules$6[o];
+    }
+  }
+  var DeployDialog = /* @__PURE__ */ function() {
+    return __component__$6.exports;
+  }();
+  var render$5 = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("k-dialog", { ref: "dialog", staticClass: "lbvs-version-dialog", attrs: { "cancel-button": _vm.$t(_vm.data ? "close" : "cancel"), "submit-button": false } }, [_vm.version ? _c("lbvs-version", { attrs: { "details": _vm.details, "version": _vm.version } }) : _vm._e(), !_vm.data ? _c("p", [_vm._v(" " + _vm._s(_vm.$t("versions.message.exporting")) + " ")]) : _c("k-button-group", [_c("k-button", { attrs: { "icon": "download" }, on: { "click": _vm.download } }, [_vm._v(" " + _vm._s(_vm.$t("versions.button.download")) + " ")]), _c("k-button", { attrs: { "icon": "copy", "disabled": !_vm.supportsClipboard }, on: { "click": _vm.copyToClipboard } }, [_vm._v(" " + _vm._s(_vm.$t("versions.button.copyLink")) + " ")])], 1)], 1);
+  };
+  var staticRenderFns$5 = [];
+  const script$5 = {
+    data() {
+      return {
+        data: null,
+        version: {}
+      };
+    },
+    computed: {
+      details() {
+        if (this.data) {
+          return [
+            {
+              title: this.$t("versions.label.fileSize"),
+              value: this.data.filesize
+            }
+          ];
+        }
+        return [];
+      },
+      supportsClipboard() {
+        try {
+          window.navigator.clipboard.writeText;
+          return true;
+        } catch (e) {
+          return false;
+        }
+      }
+    },
+    methods: {
+      async copyToClipboard() {
+        await window.navigator.clipboard.writeText(this.data.url);
+        this.$store.dispatch("notification/success", ":)");
+      },
+      download() {
+        window.location = this.data.url;
+        this.$store.dispatch("notification/success", ":)");
+      },
+      async open(version) {
+        this.data = null;
+        this.version = version;
+        this.$refs.dialog.open();
+        let data = await this.$store.dispatch({
+          type: "versions/exportVersion",
+          version: this.version.name
+        });
+        if (version === this.version) {
+          this.data = data;
+        }
+      }
+    }
+  };
+  const __cssModules$5 = {};
+  var __component__$5 = /* @__PURE__ */ normalizeComponent(script$5, render$5, staticRenderFns$5, false, injectStyles$5, null, null, null);
+  function injectStyles$5(context) {
+    for (let o in __cssModules$5) {
+      this[o] = __cssModules$5[o];
+    }
+  }
+  var ExportDialog = /* @__PURE__ */ function() {
+    return __component__$5.exports;
+  }();
+  var render$4 = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c(_vm.element, { tag: "component", staticClass: "lbvs-instance-name", style: { backgroundColor: _vm.instance.color } }, [_vm._v(" " + _vm._s(_vm.instance.name) + " ")]);
+  };
+  var staticRenderFns$4 = [];
+  var InstanceName_vue_vue_type_style_index_0_lang = "\n.lbvs-instance-name {\n  display: inline-block;\n  padding: 0 0.3em;\n\n  border-radius: 3px;\n  color: var(--color-text);\n}\nstrong.lbvs-instance-name {\n  padding: 0.2em 0.4em;\n}\n";
+  const script$4 = {
+    props: {
+      inline: Boolean,
+      instance: Object
+    },
+    computed: {
+      element() {
+        return this.inline ? "span" : "strong";
+      }
+    }
+  };
+  const __cssModules$4 = {};
+  var __component__$4 = /* @__PURE__ */ normalizeComponent(script$4, render$4, staticRenderFns$4, false, injectStyles$4, null, null, null);
+  function injectStyles$4(context) {
+    for (let o in __cssModules$4) {
+      this[o] = __cssModules$4[o];
+    }
+  }
+  var InstanceName = /* @__PURE__ */ function() {
+    return __component__$4.exports;
+  }();
+  var render$3 = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("div", { staticClass: "lbvs-status" }, [_c("k-view", [_c("k-grid", [_c("k-column", { attrs: { "width": "1/3" } }, [_c("header", { staticClass: "k-section-header" }, [_c("k-headline", [_vm._v(" " + _vm._s(_vm.$t("versions.label.instances")) + " ")])], 1), _c("ul", { staticClass: "lbvs-status-instances" }, _vm._l(_vm.$store.state.versions.data.instances, function(instance) {
+      return _c("li", { key: instance.name, class: { current: instance.isCurrent } }, [_c("lbvs-instance-name", { attrs: { "instance": instance } }), instance.isCurrent ? _c("span", { staticClass: "lbvs-status-current" }, [_vm._v(" " + _vm._s(_vm.$t("versions.label.current")) + " ")]) : _vm._e(), instance.version ? _c("lbvs-version", { attrs: { "version": { name: instance.version, label: instance.versionLabel } } }) : _vm._e()], 1);
+    }), 0)]), _c("k-column", { staticClass: "lbvs-status-changes", attrs: { "width": "2/3" } }, [_c("header", { staticClass: "k-section-header" }, [_c("k-headline", [_vm._v(" " + _vm._s(_vm.$t("versions.label.changes")) + " ")]), _c("k-button-group", [_c("k-button", { attrs: { "icon": "add", "disabled": _vm.canCreateVersion === false }, on: { "click": _vm.onCreate } }, [_vm._v(" " + _vm._s(_vm.$t("versions.button.create")) + " ")])], 1)], 1), _c("lbvs-changes", { attrs: { "changes": _vm.currentChanges } })], 1)], 1)], 1), _c("lbvs-create-dialog", { ref: "createDialog" })], 1);
+  };
+  var staticRenderFns$3 = [];
+  var Status_vue_vue_type_style_index_0_lang = "\n.lbvs-status {\n  padding-top: 1.5rem;\n  padding-bottom: 2rem;\n\n  background: #2b2b2b;\n  color: #fff;\n}\n.lbvs-status .k-grid {\n  /* gap between the columns on mobile */\n  grid-row-gap: 1.5rem;\n}\n.lbvs-status-instances li {\n  padding: 0.8rem;\n}\n.lbvs-status-instances li.current {\n  background: var(--color-background);\n  color: var(--color-text);\n}\n.lbvs-status-current {\n  margin-left: 0.5rem;\n  padding: 0.1em 0.3em;\n\n  border: 1px solid var(--color-border);\n  border-radius: 3px;\n\n  font-size: var(--font-size-small);\n}\n.lbvs-status-instances .lbvs-version {\n  margin-top: 0.4rem;\n}\n.lbvs-status-changes > div {\n  /* ensure the list of changes fills the whole view vertically */\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n}\n.lbvs-status-changes .lbvs-changes {\n  height: 100%;\n  padding: 0.8rem;\n\n  background: var(--color-background);\n  color: var(--color-text);\n}\n";
+  const script$3 = {
+    computed: {
+      canCreateVersion() {
+        return this.$permissions["lukasbestle.versions"].create === true && Object.keys(this.currentChanges).length > 0;
+      },
+      currentChanges() {
+        return this.$store.getters["versions/currentInstance"].changes;
+      }
+    },
+    methods: {
+      onCreate() {
+        let instance = this.$store.getters["versions/currentInstance"].name;
+        return this.$refs.createDialog.open(instance);
+      }
+    }
+  };
+  const __cssModules$3 = {};
+  var __component__$3 = /* @__PURE__ */ normalizeComponent(script$3, render$3, staticRenderFns$3, false, injectStyles$3, null, null, null);
+  function injectStyles$3(context) {
+    for (let o in __cssModules$3) {
+      this[o] = __cssModules$3[o];
+    }
+  }
+  var Status = /* @__PURE__ */ function() {
+    return __component__$3.exports;
+  }();
+  var render$2 = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("div", { staticClass: "lbvs-version" }, [_c("span", { staticClass: "lbvs-version-header" }, [_c("strong", [_vm._v(_vm._s(_vm.version.label))]), _vm.instances ? _vm._l(_vm.version.instances, function(instance) {
+      return _c("lbvs-instance-name", { key: instance, attrs: { "inline": true, "instance": _vm.$store.state.versions.data.instances[instance] } });
+    }) : _vm._e()], 2), _c("dl", { staticClass: "lbvs-version-details" }, [_vm._l(_vm.mergedDetails, function(detail) {
+      return [_c("dt", { key: detail.title, staticClass: "k-offscreen" }, [_vm._v(" " + _vm._s(detail.title) + ": ")]), _c("dd", { key: detail.title, attrs: { "title": detail.title } }, [_vm._v(" " + _vm._s(detail.value) + " ")])];
+    })], 2)]);
+  };
+  var staticRenderFns$2 = [];
+  var Version_vue_vue_type_style_index_0_lang = '\n.lbvs-version {\n  line-height: 1.4;\n}\n.lbvs-version-header {\n  display: block;\n}\n.lbvs-version .lbvs-instance-name {\n  margin-right: 0.3em;\n}\n.lbvs-version-details {\n  font-size: var(--font-size-small);\n}\n.lbvs-version-details dd {\n  display: inline;\n}\n.lbvs-version-details dd:not(:last-child)::after {\n  content: " \xB7 ";\n\n  color: var(--color-text-light);\n}\n';
+  const script$2 = {
+    props: {
+      details: {
+        type: Array,
+        default() {
+          return [];
+        }
+      },
+      instances: Boolean,
+      version: Object
+    },
+    computed: {
+      mergedDetails() {
+        let details = [
+          {
+            title: this.$t("versions.label.versionName"),
+            value: this.version.name
+          },
+          ...this.details
+        ];
+        return details.filter((detail) => detail.value);
+      }
+    }
+  };
+  const __cssModules$2 = {};
+  var __component__$2 = /* @__PURE__ */ normalizeComponent(script$2, render$2, staticRenderFns$2, false, injectStyles$2, null, null, null);
+  function injectStyles$2(context) {
+    for (let o in __cssModules$2) {
+      this[o] = __cssModules$2[o];
+    }
+  }
+  var Version = /* @__PURE__ */ function() {
+    return __component__$2.exports;
+  }();
+  var render$1 = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("div", { staticClass: "lbvs-versions" }, [_c("k-view", [_c("header", { staticClass: "k-section-header" }, [_c("k-headline", [_vm._v(" " + _vm._s(_vm.$t("versions.label.versions")) + " ")])], 1), _vm.items.length ? _c("k-list", _vm._l(_vm.items, function(item, index) {
+      return _c("k-list-item", _vm._b({ key: index, attrs: { "image": true, "options": _vm.options(item) }, on: { "action": function($event) {
+        return _vm.onOption($event, item);
+      } }, scopedSlots: _vm._u([{ key: "image", fn: function() {
+        return [_vm._v(" " + _vm._s(index + 1) + " ")];
+      }, proxy: true }], null, true) }, "k-list-item", item, false), [_c("lbvs-version", { attrs: { "details": _vm.versionDetails(item), "instances": true, "version": item } })], 1);
+    }), 1) : _c("k-empty", { attrs: { "layout": "cards" } }, [_vm._v(" " + _vm._s(_vm.$t("versions.label.empty")) + " ")])], 1), _c("lbvs-export-dialog", { ref: "exportDialog" }), _c("lbvs-deploy-dialog", { ref: "deployDialog" }), _c("lbvs-delete-dialog", { ref: "deleteDialog" })], 1);
+  };
+  var staticRenderFns$1 = [];
+  var Versions_vue_vue_type_style_index_0_lang = "\n.lbvs-versions {\n  padding-top: 1.5rem;\n}\n.lbvs-versions .k-list-item-image {\n  font-size: var(--font-size-small);\n  line-height: 38px;\n  text-align: center;\n\n  color: var(--color-text-light);\n}\n.lbvs-versions .k-list-item-text {\n  white-space: initial;\n}\n";
+  const script$1 = {
+    computed: {
+      items() {
+        return Object.values(this.$store.state.versions.data.versions);
+      }
+    },
+    methods: {
+      onOption(option, version) {
+        return this.$refs[option + "Dialog"].open(version);
+      },
+      options(version) {
+        let permissions = this.$permissions["lukasbestle.versions"];
+        return [
+          {
+            click: "export",
+            disabled: permissions.export !== true,
+            icon: "download",
+            text: this.$t("versions.button.export")
+          },
+          {
+            click: "deploy",
+            disabled: permissions.deploy !== true,
+            icon: "wand",
+            text: this.$t("versions.button.deploy")
+          },
+          {
+            click: "delete",
+            disabled: permissions.delete !== true || version.instances.length > 0,
+            icon: "trash",
+            text: this.$t("versions.button.delete")
+          }
+        ];
+      },
+      versionDetails(version) {
+        return [
+          {
+            title: this.$t("versions.label.creation"),
+            value: this.versionDetailsToString("creationData", {
+              created: version.created ? this.$library.dayjs.unix(version.created).format("YYYY-MM-DD HH:mm") : "?",
+              creator: version.creatorName || version.creatorEmail || "?"
+            })
+          },
+          {
+            title: this.$t("versions.label.originInstance"),
+            value: this.versionDetailsToString("from", {
+              originInstance: version.originInstance || "?"
+            })
+          }
+        ];
+      },
+      versionDetailsToString(key, data) {
+        if (Object.values(data).every((value) => value === "?") === true) {
+          return null;
+        }
+        return this.$t("versions.label." + key, data);
+      }
+    }
+  };
+  const __cssModules$1 = {};
+  var __component__$1 = /* @__PURE__ */ normalizeComponent(script$1, render$1, staticRenderFns$1, false, injectStyles$1, null, null, null);
+  function injectStyles$1(context) {
+    for (let o in __cssModules$1) {
+      this[o] = __cssModules$1[o];
+    }
+  }
+  var Versions = /* @__PURE__ */ function() {
+    return __component__$1.exports;
+  }();
+  var render = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("k-inside", [_c("div", { staticClass: "lbvs-view" }, [_vm.isLoading ? _c("k-loader") : [_c("lbvs-status"), _c("lbvs-versions")]], 2)]);
+  };
+  var staticRenderFns = [];
+  var View_vue_vue_type_style_index_0_lang = ".lbvs-version-dialog .lbvs-version {\n    margin-bottom: 1.5rem;\n}\n.lbvs-view > .k-loader {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n";
+  const script = {
+    data() {
+      return {
+        isLoading: true
+      };
+    },
+    async mounted() {
+      try {
+        this.isLoading = true;
+        await this.$store.dispatch("versions/load");
+      } finally {
+        this.isLoading = false;
+      }
+    }
+  };
+  const __cssModules = {};
+  var __component__ = /* @__PURE__ */ normalizeComponent(script, render, staticRenderFns, false, injectStyles, null, null, null);
+  function injectStyles(context) {
+    for (let o in __cssModules) {
+      this[o] = __cssModules[o];
+    }
+  }
+  var View = /* @__PURE__ */ function() {
+    return __component__.exports;
+  }();
+  var Store = (app) => ({
+    namespaced: true,
+    state: {
+      data: {
+        instances: {},
+        versions: {}
+      }
+    },
+    getters: {
+      currentInstance(state) {
+        return Object.values(state.data.instances).find((instance) => instance.isCurrent);
+      }
+    },
+    mutations: {
+      SET_DATA(state, { instances, versions }) {
+        state.data.instances = instances;
+        state.data.versions = versions;
+      }
+    },
+    actions: {
+      async load({ commit }) {
+        commit("SET_DATA", await app.$api.get("versions"));
+      },
+      async prepareVersionCreation(context, { instance }) {
+        return await app.$api.post("versions/prepareCreation", { instance });
+      },
+      async createVersion({ commit }, { instance, label }) {
+        let data = await app.$api.post("versions/create", { instance, label });
+        commit("SET_DATA", data);
+      },
+      async deleteVersion({ commit }, { version }) {
+        let data = await app.$api.delete("versions/versions/" + version);
+        commit("SET_DATA", data);
+      },
+      async deployVersion({ commit }, { instance, version }) {
+        let data = await app.$api.post("versions/versions/" + version + "/deploy", { instance });
+        commit("SET_DATA", data);
+      },
+      async exportVersion(context, { version }) {
+        return await app.$api.post("versions/versions/" + version + "/export");
+      }
+    }
+  });
+  panel.plugin("lukasbestle/versions", {
+    components: {
+      "lbvs-changes": Changes,
+      "lbvs-create-error-dialog": CreateErrorDialog,
+      "lbvs-create-dialog": CreateDialog,
+      "lbvs-delete-dialog": DeleteDialog,
+      "lbvs-deploy-dialog": DeployDialog,
+      "lbvs-export-dialog": ExportDialog,
+      "lbvs-instance-name": InstanceName,
+      "lbvs-status": Status,
+      "lbvs-version": Version,
+      "lbvs-versions": Versions,
+      "lbvs-versions-view": View
+    },
+    created(app) {
+      app.$store.registerModule("versions", Store(app));
+    }
+  });
+})();

@@ -21,8 +21,7 @@ $kirbyVersion = App::version();
 if (
     $kirbyVersion !== null &&
     (
-        version_compare($kirbyVersion, '3.5.5', '<') === true ||
-        version_compare($kirbyVersion, '3.6.0-alpha', '>=') === true
+        version_compare($kirbyVersion, '3.5.5', '<') === true
     )
 ) {
     throw new Exception(
@@ -44,6 +43,7 @@ load([
 // register the plugin
 App::plugin('lukasbestle/versions', [
     'api'          => require __DIR__ . '/src/config/api.php',
+    'areas'        => require __DIR__ . '/src/config/areas.php',
     'hooks'        => require __DIR__ . '/src/config/hooks.php',
     'options'      => require __DIR__ . '/src/config/options.php',
     'permissions'  => require __DIR__ . '/src/config/permissions.php',

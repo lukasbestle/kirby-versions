@@ -25,20 +25,8 @@ panel.plugin("lukasbestle/versions", {
     "lbvs-instance-name": InstanceName,
     "lbvs-status": Status,
     "lbvs-version": Version,
-    "lbvs-versions": Versions
-  },
-  views: {
-    versions: {
-      component: View,
-      icon: "layers",
-      menu(app) {
-        if (app.$permissions["lukasbestle.versions"].access !== true) {
-          return "disabled";
-        }
-
-        return true;
-      }
-    }
+    "lbvs-versions": Versions,
+    "lbvs-versions-view": View,
   },
   created(app) {
     app.$store.registerModule("versions", Store(app));
