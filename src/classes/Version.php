@@ -4,9 +4,9 @@ namespace LukasBestle\Versions;
 
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\LogicException;
+use Kirby\Filesystem\Dir;
+use Kirby\Filesystem\F;
 use Kirby\Toolkit\Collection;
-use Kirby\Toolkit\Dir;
-use Kirby\Toolkit\F;
 use Kirby\Toolkit\Properties;
 
 /**
@@ -174,7 +174,10 @@ class Version
             $instance->changes()->lockFiles() !== []
         ) {
             $instance->prepareCreation();
-            $instance->createVersion(t('versions.name.autosave'));
+
+            /** @var string $label */
+            $label = t('versions.name.autosave');
+            $instance->createVersion($label);
         }
 
         // now we can deploy the version to the instance

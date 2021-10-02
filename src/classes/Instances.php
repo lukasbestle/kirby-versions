@@ -61,6 +61,7 @@ class Instances extends Collection
 
         // prepend the local site if not already configured
         if ($initializeLocalSite === true) {
+            /** @var string $name */
             $name = t('versions.name.local');
             $instances = [$name => new Instance([
                 'contentRoot' => $currentContentRoot,
@@ -127,7 +128,7 @@ class Instances extends Collection
                     $label = $attribute;
                     $value = true;
                 }
-                
+
 
                 if ($label === 'worktree') {
                     $path = $value;

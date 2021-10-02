@@ -7,17 +7,20 @@
         </k-headline>
       </header>
 
-      <k-list v-if="items.length">
-        <k-list-item
+      <k-items v-if="items.length" layout="list">
+        <k-item
           v-for="(item, index) in items"
           :key="index"
           v-bind="item"
           :image="true"
+          layout="list"
           :options="options(item)"
           @action="onOption($event, item)"
         >
           <template #image>
-            {{ index + 1 }}
+            <span class="lbvs-versions-index">
+              {{ index + 1 }}
+            </span>
           </template>
 
           <lbvs-version
@@ -25,8 +28,8 @@
             :instances="true"
             :version="item"
           />
-        </k-list-item>
-      </k-list>
+        </k-item>
+      </k-items>
 
       <k-empty v-else layout="cards">
         {{ $t("versions.label.empty") }}
@@ -112,15 +115,20 @@ export default {
   padding-top: 1.5rem;
 }
 
-.lbvs-versions .k-list-item-image {
+.lbvs-versions-index {
   font-size: var(--font-size-small);
   line-height: 38px;
+  padding-left: 1em;
   text-align: center;
 
   color: var(--color-text-light);
 }
- 
-.lbvs-versions .k-list-item-text {
-  white-space: initial;
+
+.lbvs-versions .k-list-item {
+  height: auto;
+}
+
+.lbvs-versions .k-item-content {
+  padding: 0.5em;
 }
 </style>

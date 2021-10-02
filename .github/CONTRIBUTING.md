@@ -39,7 +39,7 @@ npm install
 npm run dev
 ```
 
-This will run the Parcel bundler, which will listen for changes to the files inside the `src/frontend` directory. You can now open the Panel of your Kirby installation. The plugin components should be reloaded automatically whenever you change something.
+This will run the kirbyup bundler, which will listen for changes to the files inside the `src/frontend` directory. You can now open the Panel of your Kirby installation.
 
 If you want to work on backend code and want to run the automated tests, you need the following command:
 

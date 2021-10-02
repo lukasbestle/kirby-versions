@@ -151,6 +151,8 @@ class Instance
             $userName = $user->name()->or($userEmail)->value();
         } else {
             $userEmail = 'versions@' . $this->plugin->kirby()->request()->url()->domain();
+
+            /** @var string $userName */
             $userName  = t('view.versions');
         }
 
@@ -251,7 +253,7 @@ class Instance
                     if (isset($model['lock']['user']) === true) {
                         $users[] = $model['lock']['user'];
                     }
-                    
+
                     if (isset($model['unlock']) === true) {
                         $users = array_merge($users, $model['unlock']);
                     }

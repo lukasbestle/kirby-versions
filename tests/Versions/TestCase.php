@@ -3,7 +3,7 @@
 namespace LukasBestle\Versions;
 
 use Kirby\Cms\App;
-use Kirby\Toolkit\Dir;
+use Kirby\Filesystem\Dir;
 use PHPUnit\Framework\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase

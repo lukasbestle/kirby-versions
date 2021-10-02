@@ -145,7 +145,7 @@ class VersionsTest extends TestCase
         $this->plugin->instances()->first()->setCurrentCommit($commits[2][1]);
 
         $versions->update();
-        
+
         $this->assertCount(3, $versions);
         $this->assertSame([
             'TeSt1' => [

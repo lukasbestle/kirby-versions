@@ -6,7 +6,7 @@ use Kirby\Cms\App;
 use Kirby\Exception\Exception;
 use Kirby\Exception\LogicException;
 use Kirby\Exception\PermissionException;
-use Kirby\Toolkit\Dir;
+use Kirby\Filesystem\Dir;
 
 /**
  * Plugin
