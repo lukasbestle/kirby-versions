@@ -181,7 +181,7 @@ class InstancesTest extends TestCase
             'out branch, please run `git checkout` with the latest Git tag'
         );
 
-        $this->plugin->gitCommand(null, 'checkout', 'master');
+        $this->plugin->gitCommand(null, 'checkout', 'main');
 
         new Instances($this->plugin);
     }

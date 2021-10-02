@@ -64,7 +64,7 @@ class TestCase extends BaseTestCase
         Dir::make($this->contentRoot2);
 
         $this->plugin = new Plugin($this->kirby);
-        $this->plugin->gitCommand(null, 'init');
+        $this->plugin->gitCommand(null, 'init', '-b', 'main');
         $this->plugin->gitCommand(null, 'add', '-A');
         $this->plugin->gitCommand(null, '-c', 'user.name=Test', '-c', 'user.email=test@example.com', 'commit', '-m', 'Initial commit');
         $this->plugin->gitCommand(null, 'tag', 'initial');
