@@ -158,8 +158,11 @@ class Instance
 
         // auto-generate a unique name
         $date = date('Ymd');
-        $versionsToday = count($this->plugin->versions()->filterBy('name', '^=', $date . '_'));
-        $name = $date . '_' . str_pad((string)($versionsToday + 1), 3, '0', STR_PAD_LEFT);
+        $nextNumber = count($this->plugin->versions()->filterBy('name', '^=', $date . '_')) + 1;
+        do {
+            $name = $date . '_' . str_pad((string)($nextNumber), 3, '0', STR_PAD_LEFT);
+            $nextNumber++;
+        } while ($this->plugin->versions()->has($name) === true);
 
         // build the label
         $label = $this->name() . ':::' . $label;

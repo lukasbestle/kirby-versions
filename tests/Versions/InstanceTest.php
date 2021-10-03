@@ -61,36 +61,47 @@ class InstanceTest extends TestCase
         $this->plugin->gitCommand(null, 'reset', '--', '.lock');
 
         // without logged-in user
-        $version = $this->instance->createVersion('Test Label');
+        $version1 = $this->instance->createVersion('Test Label');
 
-        $this->assertSame(date('Ymd') . '_001', $version->name());
-        $this->assertSame('versions@example.com', $version->creatorEmail());
-        $this->assertSame('Versions', $version->creatorName());
-        $this->assertSame('Test Label', $version->label());
-        $this->assertSame('Test Instance', $version->originInstance());
+        $this->assertSame(date('Ymd') . '_001', $version1->name());
+        $this->assertSame('versions@example.com', $version1->creatorEmail());
+        $this->assertSame('Versions', $version1->creatorName());
+        $this->assertSame('Test Label', $version1->label());
+        $this->assertSame('Test Instance', $version1->originInstance());
 
-        $this->assertSame($version, $this->plugin->versions()->get(date('Ymd') . '_001'));
-        $this->assertSame($version->commit(), $this->instance->currentCommit());
+        $this->assertSame($version1, $this->plugin->versions()->get(date('Ymd') . '_001'));
+        $this->assertSame($version1->commit(), $this->instance->currentCommit());
         $this->assertSame([], $this->instance->changes()->overall());
 
-        // without logged-in user
+        // with logged-in user
         file_put_contents($this->contentRoot1 . '/test', 'another-test');
         $this->plugin->gitCommand(null, 'add', '-A');
         $this->plugin->gitCommand(null, 'reset', '--', '.lock');
         $this->instance->changes()->update();
 
         $this->kirby->auth()->setUser($this->kirby->user('test-editor'));
-        $version = $this->instance->createVersion('Another Test:::Label');
+        $version2 = $this->instance->createVersion('Another Test:::Label');
 
-        $this->assertSame(date('Ymd') . '_002', $version->name());
-        $this->assertSame('test-editor@example.com', $version->creatorEmail());
-        $this->assertSame('Test Editor', $version->creatorName());
-        $this->assertSame('Another Test:::Label', $version->label());
-        $this->assertSame('Test Instance', $version->originInstance());
+        $this->assertSame(date('Ymd') . '_002', $version2->name());
+        $this->assertSame('test-editor@example.com', $version2->creatorEmail());
+        $this->assertSame('Test Editor', $version2->creatorName());
+        $this->assertSame('Another Test:::Label', $version2->label());
+        $this->assertSame('Test Instance', $version2->originInstance());
 
-        $this->assertSame($version, $this->plugin->versions()->get(date('Ymd') . '_002'));
-        $this->assertSame($version->commit(), $this->instance->currentCommit());
+        $this->assertSame($version2, $this->plugin->versions()->get(date('Ymd') . '_002'));
+        $this->assertSame($version2->commit(), $this->instance->currentCommit());
         $this->assertSame([], $this->instance->changes()->overall());
+
+        // automatically increment the version name past all existing ones
+        $version1->delete();
+        file_put_contents($this->contentRoot1 . '/test', 'a-third-test');
+        $this->plugin->gitCommand(null, 'add', '-A');
+        $this->plugin->gitCommand(null, 'reset', '--', '.lock');
+        $this->instance->changes()->update();
+
+        $version3 = $this->instance->createVersion('Third Test');
+
+        $this->assertSame(date('Ymd') . '_003', $version3->name());
     }
 
     /**
