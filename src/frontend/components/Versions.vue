@@ -118,7 +118,7 @@ export default {
 .lbvs-versions-index {
   font-size: var(--font-size-small);
   line-height: 38px;
-  padding-left: 1em;
+  padding-inline-start: 1em;
   text-align: center;
 
   color: var(--color-text-light);

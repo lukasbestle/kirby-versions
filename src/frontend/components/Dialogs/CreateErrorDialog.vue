@@ -52,7 +52,7 @@ export default {
 }
 
 .lbvs-create-error-dialog-list li {
-  margin-left: 1.2rem;
+  margin-inline-start: 1.2rem;
 
   list-style: disc;
 }

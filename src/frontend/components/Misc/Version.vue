@@ -2,7 +2,7 @@
   <div class="lbvs-version">
     <span class="lbvs-version-header">
       <strong>{{ version.label }}</strong>
-      
+
       <template v-if="instances">
         <lbvs-instance-name
           v-for="instance in version.instances"
@@ -47,7 +47,7 @@ export default {
         },
         ...this.details
       ];
-      
+
       return details.filter(detail => detail.value);
     }
   }
@@ -64,7 +64,7 @@ export default {
 }
 
 .lbvs-version .lbvs-instance-name {
-  margin-right: 0.3em;
+  margin: 0 0.4em;
 }
 
 .lbvs-version-details {

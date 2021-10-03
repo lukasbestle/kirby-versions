@@ -102,7 +102,8 @@ export default {
 }
 
 .lbvs-status-current {
-  margin-left: 0.5rem;
+  display: inline-block;
+  margin-inline-start: 0.5rem;
   padding: 0.1em 0.3em;
 
   border: 1px solid var(--color-border);

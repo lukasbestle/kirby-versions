@@ -38,7 +38,7 @@ export default {
 .lbvs-view > .k-loader {
   position: absolute;
   top: 50%;
-  left: 50%;
+  inset-inline-start: 50%;
   transform: translate(-50%, -50%);
 }
 </style>

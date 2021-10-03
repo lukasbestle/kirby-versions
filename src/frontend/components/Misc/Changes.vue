@@ -26,13 +26,13 @@ export default {
 }
 
 .lbvs-changes li {
-  padding-left: 1.2em;
+  padding-inline-start: 1.2em;
   position: relative;
 }
 
 .lbvs-changes li span {
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
 
   font-weight: bold;
 }
