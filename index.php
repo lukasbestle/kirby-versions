@@ -2,6 +2,7 @@
 
 use Kirby\Cms\App;
 use Kirby\Exception\Exception;
+use Kirby\Filesystem\F;
 
 /**
  * Kirby Versions Plugin
@@ -32,7 +33,7 @@ if (
 }
 
 // autoload classes
-load([
+F::loadClasses([
     'LukasBestle\Versions\Changes'   => __DIR__ . '/src/classes/Changes.php',
     'LukasBestle\Versions\Instance'  => __DIR__ . '/src/classes/Instance.php',
     'LukasBestle\Versions\Instances' => __DIR__ . '/src/classes/Instances.php',

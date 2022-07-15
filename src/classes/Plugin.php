@@ -62,7 +62,7 @@ class Plugin
      */
     public function __construct(?App $kirby = null)
     {
-        $this->kirby = $kirby ?? kirby();
+        $this->kirby = $kirby ?? App::instance();
     }
 
     /**

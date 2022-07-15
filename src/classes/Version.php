@@ -7,6 +7,7 @@ use Kirby\Exception\LogicException;
 use Kirby\Filesystem\Dir;
 use Kirby\Filesystem\F;
 use Kirby\Toolkit\Collection;
+use Kirby\Toolkit\I18n;
 use Kirby\Toolkit\Properties;
 
 /**
@@ -176,7 +177,7 @@ class Version
             $instance->prepareCreation();
 
             /** @var string $label */
-            $label = t('versions.name.autosave');
+            $label = I18n::translate('versions.name.autosave');
             $instance->createVersion($label);
         }
 

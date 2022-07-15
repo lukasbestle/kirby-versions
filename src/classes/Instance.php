@@ -5,6 +5,7 @@ namespace LukasBestle\Versions;
 use Kirby\Data\Data;
 use Kirby\Exception\Exception;
 use Kirby\Exception\LogicException;
+use Kirby\Toolkit\I18n;
 use Kirby\Toolkit\Properties;
 
 /**
@@ -153,7 +154,7 @@ class Instance
             $userEmail = 'versions@' . $this->plugin->kirby()->request()->url()->domain();
 
             /** @var string $userName */
-            $userName  = t('view.versions');
+            $userName = I18n::translate('view.versions');
         }
 
         // auto-generate a unique name

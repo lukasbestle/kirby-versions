@@ -1,6 +1,7 @@
 <?php
 
 use Kirby\Exception\LogicException;
+use Kirby\Toolkit\I18n;
 use LukasBestle\Versions\Plugin;
 
 return [
@@ -13,7 +14,7 @@ return [
         }
 
         return [
-            'label' => t('view.versions'),
+            'label' => I18n::translate('view.versions'),
             'icon'  => 'layers',
             'menu'  => $accessPermission ? true : 'disabled',
             'views' => [

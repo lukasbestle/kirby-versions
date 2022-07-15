@@ -15,4 +15,8 @@
             <directory name="vendor" />
         </ignoreFiles>
     </projectFiles>
+
+    <plugins>
+        <plugin filename="etc/psalm-plugins/HelperFunctionUsePlugin.php" />
+    </plugins>
 </psalm>

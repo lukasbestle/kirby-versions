@@ -5,6 +5,7 @@ namespace LukasBestle\Versions;
 use Kirby\Exception\Exception;
 use Kirby\Exception\NotFoundException;
 use Kirby\Toolkit\Collection;
+use Kirby\Toolkit\I18n;
 use Kirby\Toolkit\Str;
 
 /**
@@ -62,7 +63,7 @@ class Instances extends Collection
         // prepend the local site if not already configured
         if ($initializeLocalSite === true) {
             /** @var string $name */
-            $name = t('versions.name.local');
+            $name = I18n::translate('versions.name.local');
             $instances = [$name => new Instance([
                 'contentRoot' => $currentContentRoot,
                 'color'       => 'var(--color-focus-light)',
