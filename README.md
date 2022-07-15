@@ -1,6 +1,6 @@
 # Versions for Kirby 3
 
-[![Kirby 3.6.0+](https://img.shields.io/badge/Kirby-3.6.0%2B-green)](https://getkirby.com)
+[![Kirby 3.7.0+](https://img.shields.io/badge/Kirby-3.7.0%2B-green)](https://getkirby.com)
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
 [![Release](https://img.shields.io/github/v/release/lukasbestle/kirby-versions)](https://github.com/lukasbestle/kirby-versions/releases/latest)
 [![CI Status](https://img.shields.io/github/workflow/status/lukasbestle/kirby-versions/CI?label=CI)](https://github.com/lukasbestle/kirby-versions/actions?query=workflow%3ACI)
@@ -38,10 +38,10 @@ This plugin is made for you if you have one or multiple of the use cases describ
 
 ## Requirements
 
-- Kirby 3.6.0+
+- Kirby 3.7.0+
 - Git 2.5+ (ideally newer for better reliability)
 
-Kirby 3.5.5+ is supported by version 1.0.0 of this plugin.
+Support for older Kirby versions is provided by previous versions of this plugin. I recommend to update your Kirby installation to benefit from fixes and improvements both in Kirby and in this plugin.
 
 ## Documentation
 
