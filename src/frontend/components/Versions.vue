@@ -7,31 +7,16 @@
 				</k-headline>
 			</header>
 
-			<k-items v-if="items.length" layout="list">
-				<k-item
-					v-for="(item, index) in items"
-					:key="index"
-					v-bind="item"
-					:image="true"
-					layout="list"
-					:options="options(item)"
-					@action="onOption($event, item)"
-				>
-					<template #image>
-						<span class="lbvs-versions-index">
-							{{ index + 1 }}
-						</span>
-					</template>
+			<k-items
+				v-if="items.length"
+				:columns="columns"
+				:items="items"
+				layout="table"
+				:sortable="false"
+				@option="onOption"
+			/>
 
-					<lbvs-version
-						:details="versionDetails(item)"
-						:instances="true"
-						:version="item"
-					/>
-				</k-item>
-			</k-items>
-
-			<k-empty v-else layout="cards">
+			<k-empty v-else icon="protected" layout="table">
 				{{ $t("versions.label.empty") }}
 			</k-empty>
 		</k-view>
@@ -45,8 +30,56 @@
 <script>
 export default {
 	computed: {
+		columns() {
+			return {
+				title: {
+					label: this.$t("versions.label.label"),
+					type: "lbvs-version-label",
+					mobile: true,
+					width: "35%"
+				},
+				instances: {
+					label: this.$t("versions.label.instances"),
+					type: "lbvs-instance-names",
+					mobile: true,
+					width: "25%"
+				},
+				creation: {
+					label: this.$t("versions.label.creation"),
+					type: "text",
+					width: "25%"
+				},
+				originInstance: {
+					label: this.$t("versions.label.originInstance"),
+					type: "lbvs-instance-names",
+					width: "15%"
+				}
+			};
+		},
 		items() {
-			return Object.values(this.$store.state.versions.data.versions);
+			return Object.values(this.$store.state.versions.data.versions).map(
+				(version) => {
+					// assemble combined fields for the table layout
+					version.creation = this.$t("versions.label.creationData", {
+						created: version.created
+							? this.$library.dayjs
+									.unix(version.created)
+									.format("YYYY-MM-DD HH:mm")
+							: "?",
+						creator: version.creatorName || version.creatorEmail || "?"
+					});
+
+					version.title = {
+						label: version.label,
+						name: version.name
+					};
+
+					// populate options dropdown of this row
+					version.options = this.options(version);
+
+					return version;
+				}
+			);
 		}
 	},
 	methods: {
@@ -76,35 +109,6 @@ export default {
 					text: this.$t("versions.button.delete")
 				}
 			];
-		},
-		versionDetails(version) {
-			return [
-				{
-					title: this.$t("versions.label.creation"),
-					value: this.versionDetailsToString("creationData", {
-						created: version.created
-							? this.$library.dayjs
-									.unix(version.created)
-									.format("YYYY-MM-DD HH:mm")
-							: "?",
-						creator: version.creatorName || version.creatorEmail || "?"
-					})
-				},
-				{
-					title: this.$t("versions.label.originInstance"),
-					value: this.versionDetailsToString("from", {
-						originInstance: version.originInstance || "?"
-					})
-				}
-			];
-		},
-		versionDetailsToString(key, data) {
-			// no need to create a string if we don't have data
-			if (Object.values(data).every((value) => value === "?") === true) {
-				return null;
-			}
-
-			return this.$t("versions.label." + key, data);
 		}
 	}
 };
@@ -113,22 +117,5 @@ export default {
 <style>
 .lbvs-versions {
 	padding-top: 1.5rem;
-}
-
-.lbvs-versions-index {
-	font-size: var(--font-size-small);
-	line-height: 38px;
-	padding-inline-start: 1em;
-	text-align: center;
-
-	color: var(--color-text-light);
-}
-
-.lbvs-versions .k-list-item {
-	height: auto;
-}
-
-.lbvs-versions .k-item-content {
-	padding: 0.5em;
 }
 </style>

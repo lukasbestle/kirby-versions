@@ -26,11 +26,10 @@ return [
 
 	'versions.label.changes' => 'Änderungen',
 	'versions.label.creation' => 'Erstellung',
-	'versions.label.creationData' => 'Erstellt am {created} von {creator}',
+	'versions.label.creationData' => '{created} ({creator})',
 	'versions.label.current' => 'aktuell',
 	'versions.label.empty' => 'Noch keine Versionen',
 	'versions.label.fileSize' => 'Dateigröße',
-	'versions.label.from' => 'aus {originInstance}',
 	'versions.label.instances' => 'Instanzen',
 	'versions.label.label' => 'Beschriftung',
 	'versions.label.originInstance' => 'Ursprungsinstanz',

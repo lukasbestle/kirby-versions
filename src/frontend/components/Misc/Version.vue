@@ -1,17 +1,6 @@
 <template>
 	<div class="lbvs-version">
-		<span class="lbvs-version-header">
-			<strong>{{ version.label }}</strong>
-
-			<template v-if="instances">
-				<lbvs-instance-name
-					v-for="instance in version.instances"
-					:key="instance"
-					:inline="true"
-					:instance="$store.state.versions.data.instances[instance]"
-				/>
-			</template>
-		</span>
+		<strong>{{ version.label }}</strong>
 
 		<dl class="lbvs-version-details">
 			<template v-for="detail in mergedDetails">
@@ -55,14 +44,6 @@ export default {
 <style>
 .lbvs-version {
 	line-height: 1.4;
-}
-
-.lbvs-version-header {
-	display: block;
-}
-
-.lbvs-version .lbvs-instance-name {
-	margin: 0 0.4em;
 }
 
 .lbvs-version-details {

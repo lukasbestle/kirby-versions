@@ -6,8 +6,10 @@ import DeleteDialog from "./components/Dialogs/DeleteDialog.vue";
 import DeployDialog from "./components/Dialogs/DeployDialog.vue";
 import ExportDialog from "./components/Dialogs/ExportDialog.vue";
 import InstanceName from "./components/Misc/InstanceName.vue";
+import InstanceNamesCell from "./components/Cells/InstanceNames.vue";
 import Status from "./components/Status.vue";
 import Version from "./components/Misc/Version.vue";
+import VersionLabelCell from "./components/Cells/VersionLabel.vue";
 import Versions from "./components/Versions.vue";
 import View from "./components/View.vue";
 
@@ -16,6 +18,8 @@ import Store from "./store.js";
 
 panel.plugin("lukasbestle/versions", {
 	components: {
+		"k-table-lbvs-instance-names-cell": InstanceNamesCell,
+		"k-table-lbvs-version-label-cell": VersionLabelCell,
 		"lbvs-changes": Changes,
 		"lbvs-create-error-dialog": CreateErrorDialog,
 		"lbvs-create-dialog": CreateDialog,

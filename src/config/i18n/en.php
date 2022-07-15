@@ -26,11 +26,10 @@ return [
 
 	'versions.label.changes' => 'Changes',
 	'versions.label.creation' => 'Creation',
-	'versions.label.creationData' => 'Created on {created} by {creator}',
+	'versions.label.creationData' => '{created} ({creator})',
 	'versions.label.current' => 'current',
 	'versions.label.empty' => 'No versions yet',
 	'versions.label.fileSize' => 'File size',
-	'versions.label.from' => 'from {originInstance}',
 	'versions.label.instances' => 'Instances',
 	'versions.label.label' => 'Label',
 	'versions.label.originInstance' => 'Origin instance',
