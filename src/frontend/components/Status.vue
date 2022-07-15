@@ -101,6 +101,7 @@ export default {
 }
 .lbvs-status-instances li.current {
 	background: var(--color-background);
+	border-radius: var(--rounded);
 	color: var(--color-text);
 }
 
@@ -110,7 +111,7 @@ export default {
 	padding: 0.1em 0.3em;
 
 	border: 1px solid var(--color-border);
-	border-radius: 3px;
+	border-radius: var(--rounded-sm);
 
 	font-size: var(--font-size-small);
 }
@@ -131,6 +132,21 @@ export default {
 	padding: 0.8rem;
 
 	background: var(--color-background);
+	border-radius: var(--rounded);
 	color: var(--color-text);
+}
+
+/* no rounded corners between instances and changes columns,
+   unless the columns are displayed vertically (on mobile) */
+@media screen and (min-width: 65em) {
+	.lbvs-status-instances li.current {
+		border-start-end-radius: 0;
+		border-end-end-radius: 0;
+	}
+
+	.lbvs-status-changes .lbvs-changes {
+		border-start-start-radius: 0;
+		border-end-start-radius: 0;
+	}
 }
 </style>
