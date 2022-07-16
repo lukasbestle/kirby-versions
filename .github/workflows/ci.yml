@@ -70,7 +70,7 @@ jobs:
         uses: actions/cache@c3f1317a9e7b1ef106c153ac8c0f00fed3ddbc0d # pin@v3
         with:
           path: ~/.cache/psalm
-          key: backend-analysis-${{ matrix.php }}-v1
+          key: backend-analysis-${{ matrix.php }}-v2
 
       - name: Run tests
         if: always() && steps.finishPrepare.outcome == 'success'

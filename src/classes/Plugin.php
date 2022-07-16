@@ -62,6 +62,7 @@ class Plugin
 	 */
 	public function __construct(?App $kirby = null)
 	{
+		/** @psalm-suppress PossiblyNullPropertyAssignmentValue */
 		$this->kirby = $kirby ?? App::instance();
 	}
 

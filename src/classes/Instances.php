@@ -152,8 +152,11 @@ class Instances extends Collection
 
 		// validate each instance against the worktree setup
 		foreach ($this as $instance) {
+			/** @var \LukasBestle\Versions\Instance $instance */
+
 			// the configured instance needs to be a connected worktree
-			if (isset($worktrees[$instance->contentRoot()]) !== true) {
+			$contentRoot = $instance->contentRoot();
+			if (isset($worktrees[$contentRoot]) !== true) {
 				throw new Exception([
 					'key'  => 'versions.instance.noWorktree',
 					'data' => ['instance' => $instance->name()]
@@ -161,7 +164,7 @@ class Instances extends Collection
 			}
 
 			// the instance must have a detached head
-			$worktree = $worktrees[$instance->contentRoot()];
+			$worktree = $worktrees[$contentRoot];
 			if (isset($worktree['detached']) !== true) {
 				throw new Exception([
 					'key'  => 'versions.instance.onBranch',
@@ -169,8 +172,11 @@ class Instances extends Collection
 				]);
 			}
 
+			/** @var string $commit */
+			$commit = $worktree['HEAD'];
+
 			// set the current commit for later use
-			$instance->setCurrentCommit($worktree['HEAD']);
+			$instance->setCurrentCommit($commit);
 		}
 	}
 }
