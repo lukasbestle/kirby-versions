@@ -15,20 +15,20 @@ import View from "./components/View.vue";
 import Store from "./store.js";
 
 panel.plugin("lukasbestle/versions", {
-  components: {
-    "lbvs-changes": Changes,
-    "lbvs-create-error-dialog": CreateErrorDialog,
-    "lbvs-create-dialog": CreateDialog,
-    "lbvs-delete-dialog": DeleteDialog,
-    "lbvs-deploy-dialog": DeployDialog,
-    "lbvs-export-dialog": ExportDialog,
-    "lbvs-instance-name": InstanceName,
-    "lbvs-status": Status,
-    "lbvs-version": Version,
-    "lbvs-versions": Versions,
-    "lbvs-view": View,
-  },
-  created(app) {
-    app.$store.registerModule("versions", Store(app));
-  }
+	components: {
+		"lbvs-changes": Changes,
+		"lbvs-create-error-dialog": CreateErrorDialog,
+		"lbvs-create-dialog": CreateDialog,
+		"lbvs-delete-dialog": DeleteDialog,
+		"lbvs-deploy-dialog": DeployDialog,
+		"lbvs-export-dialog": ExportDialog,
+		"lbvs-instance-name": InstanceName,
+		"lbvs-status": Status,
+		"lbvs-version": Version,
+		"lbvs-versions": Versions,
+		"lbvs-view": View
+	},
+	created(app) {
+		app.$store.registerModule("versions", Store(app));
+	}
 });

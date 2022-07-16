@@ -1,22 +1,22 @@
 <?xml version="1.0"?>
 
 <psalm
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="https://getpsalm.org/schema/config"
-    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="https://getpsalm.org/schema/config"
+	xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
 
-    errorLevel="3"
-    resolveFromConfigFile="true"
+	errorLevel="3"
+	resolveFromConfigFile="true"
 >
-    <projectFiles>
-        <directory name="src" />
-        <file name="index.php" />
-        <ignoreFiles>
-            <directory name="vendor" />
-        </ignoreFiles>
-    </projectFiles>
+	<projectFiles>
+		<directory name="src" />
+		<file name="index.php" />
+		<ignoreFiles>
+			<directory name="vendor" />
+		</ignoreFiles>
+	</projectFiles>
 
-    <plugins>
-        <plugin filename="etc/psalm-plugins/HelperFunctionUsePlugin.php" />
-    </plugins>
+	<plugins>
+		<plugin filename="etc/psalm-plugins/HelperFunctionUsePlugin.php" />
+	</plugins>
 </psalm>
