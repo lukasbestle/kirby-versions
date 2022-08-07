@@ -6,8 +6,7 @@ return [
 	'error.versions.git.nonzero' => 'Une erreur Git s\'est produite: { message }',
 	'error.versions.git.version' => 'Le plugin Versions nécessite Git 2.5+, vous avez Git { version }',
 	'error.versions.internal' => 'Erreur interne dans le plugin Versions (code d\'erreur { code })',
-	'error.versions.instance.noRepo' => 'Le répertoire de contenu de l\'instance { instance } n\'est pas connectée à un dépôt Git, merci d\'initialiser
-  un nouveau dépôt où connectez le à un arbre de travail (worktree)',
+	'error.versions.instance.noRepo' => 'Le répertoire de contenu de l\'instance { instance } n\'est pas connectée à un dépôt Git, merci d\'initialiser un nouveau dépôt où connectez le à un arbre de travail (worktree)',
 	'error.versions.instance.noWorktree' => 'Le répertoire de contenu de l\'instance { instance } n\'est pas un arbre de travail (worktree) du répertoire de contenu de ce site actuel, merci de connecter les deux instances en tant qu\'arbre de travail (worktree)',
 	'error.versions.instance.onBranch' => 'Le répertoire de contenu de l\'instance { instance } a toujours une branche \'checked out\', merci d\'exécuter un `git checkout` avec son dernier nom (tag) Git',
 	'error.versions.lockFiles' => 'Une version ne peut pas être créée car des pages ou des fichiers ont des modifications non sauvegardées:',
