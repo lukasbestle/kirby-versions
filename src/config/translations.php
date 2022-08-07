@@ -6,4 +6,5 @@ return [
 
 	// additional translations
 	'de' => require __DIR__ . '/i18n/de.php',
+	'fr' => require __DIR__ . '/i18n/fr.php',
 ];
