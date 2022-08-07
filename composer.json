@@ -3,7 +3,7 @@
 	"description": "Versions Plugin for Kirby 3",
 	"license": "MIT",
 	"type": "kirby-plugin",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"authors": [
 		{
 			"name": "Lukas Bestle",
