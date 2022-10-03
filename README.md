@@ -39,6 +39,7 @@ This plugin is made for you if you have one or multiple of the use cases describ
 ## Requirements
 
 - Kirby 3.7.0+
+- PHP 8.0+
 - Git 2.5+ (ideally newer for better reliability)
 
 Support for older Kirby versions is provided by previous versions of this plugin. I recommend to update your Kirby installation to benefit from fixes and improvements both in Kirby and in this plugin.
