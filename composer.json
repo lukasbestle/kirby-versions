@@ -15,6 +15,7 @@
 		"getkirby/cms": ">=3.7.0 <3.9.0",
 		"getkirby/composer-installer": "^1.1"
 	},
+	"minimum-stability": "RC",
 	"autoload-dev": {
 		"psr-4": {
 			"LukasBestle\\": "tests/"
