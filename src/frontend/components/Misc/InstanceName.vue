@@ -1,10 +1,10 @@
 <template>
 	<component
 		:is="element"
-		:style="{ backgroundColor: instance.color }"
+		:style="{ backgroundColor: instanceObj.color }"
 		class="lbvs-instance-name"
 	>
-		{{ instance.name }}
+		{{ instanceObj.name }}
 	</component>
 </template>
 
@@ -12,11 +12,22 @@
 export default {
 	props: {
 		inline: Boolean,
-		instance: Object
+
+		// support both a full instance object or just the name string
+		instance: [Object, String]
 	},
 	computed: {
 		element() {
 			return this.inline ? "span" : "strong";
+		},
+		instanceObj() {
+			if (typeof this.instance === "string") {
+				// no color known, use a faded out background
+				return { name: this.instance, color: "var(--color-gray-300)" };
+			}
+
+			// already an object
+			return this.instance;
 		}
 	}
 };

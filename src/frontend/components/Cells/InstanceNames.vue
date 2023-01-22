@@ -4,7 +4,7 @@
 			v-for="instance in instances"
 			:key="instance"
 			:inline="true"
-			:instance="$store.state.versions.data.instances[instance]"
+			:instance="$store.state.versions.data.instances[instance] || instance"
 		/>
 	</div>
 </template>
@@ -13,7 +13,7 @@
 export default {
 	props: {
 		// support both a list of instances or a single instance
-		value: [Array, Object]
+		value: [Array, String]
 	},
 	computed: {
 		instances() {
