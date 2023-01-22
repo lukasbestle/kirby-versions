@@ -9,7 +9,7 @@ jobs:
     timeout-minutes: 5
     strategy:
       matrix:
-        php: ["8.0", "8.1"]
+        php: ["8.0", "8.1", "8.2"]
         dependencies: ["lowest", "locked"]
     env:
       extensions: mbstring, pcov
@@ -41,7 +41,7 @@ jobs:
           extensions: ${{ env.extensions }}
           ini-values: ${{ env.ini }}
           coverage: pcov
-          tools: phpunit:9.5.13, psalm:4.11.2
+          tools: phpunit:9.5.13, psalm:4.30.0
 
       - name: Setup problem matchers
         run: |
