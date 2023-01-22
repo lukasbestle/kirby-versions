@@ -192,7 +192,7 @@ class Changes
 		// sort the arrays by file path
 		ksort($this->inIndex);
 		ksort($this->inWorktree);
-		ksort($this->lockFiles);
+		sort($this->lockFiles);
 	}
 
 	/**
