@@ -52,7 +52,7 @@ return [
 			 *
 			 * @param string body:list of files to stage
 			 *
-			 * @return boolean if staging was successful
+			 * @return bool if staging was successful
 			 */
 			'pattern' => 'versions/addChanges',
 			'method'  => 'POST',

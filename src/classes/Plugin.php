@@ -245,6 +245,25 @@ class Plugin
 	}
 
 	/**
+	 * Stage list of changes
+	 *
+	 * @param $list
+	 *
+	 * @return bool
+	 */
+	public function stageChanges(array $list): bool
+	{
+		try {
+			// First reset all stages changes
+			$this->gitCommand(null, 'reset');
+			$this->gitCommand(null, 'add', ...array_keys($list));
+		} catch (Exception $e) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
 	 * Returns the plugin state as array filtered
 	 * to the necessary data for the API
 	 *
@@ -355,24 +374,5 @@ class Plugin
 
 		$this->validate();
 		return $this->versions = new Versions($this);
-	}
-
-	/**
-	 * Stage list of changes
-	 *
-	 * @param $list
-	 *
-	 * @return bool
-	 */
-	public function stageChanges(array $list): bool
-	{
-		try {
-			// First reset all stages changes
-			$this->gitCommand(null, 'reset');
-			$this->gitCommand(null, 'add', ...array_keys($list));
-		} catch (Exception $e) {
-			return false;
-		}
-		return true;
 	}
 }
