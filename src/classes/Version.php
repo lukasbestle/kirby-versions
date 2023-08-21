@@ -169,7 +169,7 @@ class Version
 	public function deployTo(Instance $instance): void
 	{
 		// if there are changes, we first need to create
-		// an automatic version to back them up
+		// a stash to avoid conflicts
 		if (
 			$instance->changes()->overall() !== [] ||
 			$instance->changes()->lockFiles() !== []

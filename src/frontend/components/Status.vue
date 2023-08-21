@@ -76,7 +76,8 @@ export default {
 	methods: {
 		onCreate() {
 			let instance = this.$store.getters["versions/currentInstance"].name;
-			return this.$refs.createDialog.open(instance);
+			const toStage = this.$store.getters["versions/currentChanges"];
+			return this.$refs.createDialog.open(instance, toStage);
 		}
 	}
 };

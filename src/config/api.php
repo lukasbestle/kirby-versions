@@ -46,6 +46,26 @@ return [
 		],
 		[
 			/**
+			 * Stage changes
+			 * Stages all marked changes and validates that the version
+			 * can be created based on the current set of changes
+			 *
+			 * @param string body:list of files to stage
+			 *
+			 * @return boolean if staging was successful
+			 */
+			'pattern' => 'versions/addChanges',
+			'method'  => 'POST',
+			'action'  => function (): bool {
+				/** @psalm-scope-this Kirby\Http\Route */
+				$plugin = Plugin::instance($this->kirby());
+				$plugin->checkPermission('create');
+
+				return $plugin->stageChanges($this->requestBody('changes'));
+			}
+		],
+		[
+			/**
 			 * Create version
 			 * Commits the previously prepared version
 			 *
