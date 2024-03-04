@@ -11,8 +11,8 @@
 		}
 	],
 	"require": {
-		"php": ">=8.0.0 <8.3.0",
-		"getkirby/cms": ">=3.7.0 <3.10.0",
+		"php": ">=8.0.0 <8.4.0",
+		"getkirby/cms": "^3.7",
 		"getkirby/composer-installer": "^1.1"
 	},
 	"minimum-stability": "RC",
