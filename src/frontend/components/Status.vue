@@ -4,9 +4,9 @@
 			<k-grid>
 				<k-column width="1/3">
 					<header class="k-section-header">
-						<k-headline>
+						<k-label type="section">
 							{{ $t("versions.label.instances") }}
-						</k-headline>
+						</k-label>
 					</header>
 
 					<ul class="lbvs-status-instances">
@@ -34,19 +34,18 @@
 
 				<k-column width="2/3" class="lbvs-status-changes">
 					<header class="k-section-header">
-						<k-headline>
+						<k-label type="section">
 							{{ $t("versions.label.changes") }}
-						</k-headline>
+						</k-label>
 
-						<k-button-group>
-							<k-button
-								icon="add"
-								:disabled="canCreateVersion === false"
-								@click="onCreate"
-							>
-								{{ $t("versions.button.create") }}
-							</k-button>
-						</k-button-group>
+						<k-button
+							icon="add"
+							size="xs"
+							:disabled="canCreateVersion === false"
+							@click="onCreate"
+						>
+							{{ $t("versions.button.create") }}
+						</k-button>
 					</header>
 
 					<lbvs-changes :changes="currentChanges" />
@@ -88,7 +87,8 @@ export default {
 	padding-bottom: 2rem;
 
 	background: #2b2b2b;
-	color: #fff;
+	color: var(--color-white);
+	border-radius: var(--rounded);
 }
 
 .lbvs-status .k-grid {
@@ -138,7 +138,7 @@ export default {
 
 /* no rounded corners between instances and changes columns,
    unless the columns are displayed vertically (on mobile) */
-@media screen and (min-width: 65em) {
+@media screen and (min-width: 30em) {
 	.lbvs-status-instances li.current {
 		border-start-end-radius: 0;
 		border-end-end-radius: 0;

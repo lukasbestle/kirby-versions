@@ -4,7 +4,7 @@
 
 		<dl class="lbvs-version-details">
 			<template v-for="detail in mergedDetails">
-				<dt :key="detail.title" class="k-offscreen">{{ detail.title }}:</dt>
+				<dt :key="detail.title" class="sr-only">{{ detail.title }}:</dt>
 				<dd :key="detail.title" :title="detail.title">
 					{{ detail.value }}
 				</dd>
