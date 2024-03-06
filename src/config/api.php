@@ -15,7 +15,7 @@ return [
 			'pattern' => 'versions',
 			'method'  => 'GET',
 			'action'  => function (): array {
-				/** @psalm-scope-this Kirby\Http\Route */
+				/** @psalm-scope-this \Kirby\Http\Route */
 				$plugin = Plugin::instance($this->kirby());
 				$plugin->checkPermission('access');
 
@@ -34,7 +34,7 @@ return [
 			'pattern' => 'versions/prepareCreation',
 			'method'  => 'POST',
 			'action'  => function (): array {
-				/** @psalm-scope-this Kirby\Http\Route */
+				/** @psalm-scope-this \Kirby\Http\Route */
 				$plugin = Plugin::instance($this->kirby());
 				$plugin->checkPermission('create');
 
@@ -56,7 +56,7 @@ return [
 			'pattern' => 'versions/create',
 			'method'  => 'POST',
 			'action'  => function (): array {
-				/** @psalm-scope-this Kirby\Http\Route */
+				/** @psalm-scope-this \Kirby\Http\Route */
 				$plugin = Plugin::instance($this->kirby());
 				$plugin->checkPermission('create');
 
@@ -77,7 +77,7 @@ return [
 			'pattern' => 'versions/versions/(:any)',
 			'method'  => 'DELETE',
 			'action'  => function (string $versionName): array {
-				/** @psalm-scope-this Kirby\Http\Route */
+				/** @psalm-scope-this \Kirby\Http\Route */
 				$plugin = Plugin::instance($this->kirby());
 				$plugin->checkPermission('delete');
 
@@ -99,7 +99,7 @@ return [
 			'pattern' => 'versions/versions/(:any)/deploy',
 			'method'  => 'POST',
 			'action'  => function (string $versionName): array {
-				/** @psalm-scope-this Kirby\Http\Route */
+				/** @psalm-scope-this \Kirby\Http\Route */
 				$plugin = Plugin::instance($this->kirby());
 				$plugin->checkPermission('deploy');
 
@@ -121,7 +121,7 @@ return [
 			'pattern' => 'versions/versions/(:any)/export',
 			'method'  => 'POST',
 			'action'  => function (string $versionName): array {
-				/** @psalm-scope-this Kirby\Http\Route */
+				/** @psalm-scope-this \Kirby\Http\Route */
 				$plugin = Plugin::instance($this->kirby());
 				$plugin->checkPermission('export');
 
