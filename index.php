@@ -7,7 +7,7 @@ use Kirby\Filesystem\F;
 /**
  * Kirby Versions Plugin
  * Keep track of content changes and switch between
- * different versions from the Kirby 3 Panel
+ * different versions from the Kirby Panel
  *
  * @package   Kirby Versions Plugin
  * @author    Lukas Bestle <project-kirbyversions@lukasbestle.com>
@@ -22,8 +22,8 @@ $kirbyVersion = App::version();
 if (
 	$kirbyVersion !== null &&
 	(
-		version_compare($kirbyVersion, '3.7.0-rc.1', '<') === true ||
-		version_compare($kirbyVersion, '4.0.0-alpha', '>=') === true
+		version_compare($kirbyVersion, '4.0.0-rc.1', '<') === true ||
+		version_compare($kirbyVersion, '5.0.0-alpha', '>=') === true
 	)
 ) {
 	throw new Exception(

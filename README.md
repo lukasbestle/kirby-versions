@@ -1,4 +1,4 @@
-# Versions for Kirby 3
+# Versions for Kirby
 
 [![Kirby 3.7.0+](https://img.shields.io/badge/Kirby-3.7.0%2B-green)](https://getkirby.com)
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
@@ -6,7 +6,7 @@
 [![CI Status](https://img.shields.io/github/actions/workflow/status/lukasbestle/kirby-versions/ci.yml?branch=main&label=CI)](https://github.com/lukasbestle/kirby-versions/actions?query=workflow%3ACI+branch%3Amain)
 [![Coverage Status](https://img.shields.io/codecov/c/gh/lukasbestle/kirby-versions?token=IBYEIB22SM)](https://codecov.io/gh/lukasbestle/kirby-versions)
 
-> Keep track of content changes and switch between different versions from the Kirby 3 Panel
+> Keep track of content changes and switch between different versions from the Kirby Panel
 
 ![Screenshot of the Versions view in the Kirby Panel](screenshot.png)
 
@@ -38,8 +38,8 @@ This plugin is made for you if you have one or multiple of the use cases describ
 
 ## Requirements
 
-- Kirby 3.7.0+
-- PHP 8.0+
+- Kirby 4.0.0+ (version 1.1.0 supports Kirby 3.7.0+)
+- PHP 8.1+
 - Git 2.5+ (ideally newer for better reliability)
 
 Support for older Kirby versions is provided by previous versions of this plugin. I recommend to update your Kirby installation to benefit from fixes and improvements both in Kirby and in this plugin.
