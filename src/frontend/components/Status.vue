@@ -120,7 +120,7 @@ export default {
 	margin-top: 0.4rem;
 }
 
-.lbvs-status-changes > div {
+.lbvs-status-changes {
 	/* ensure the list of changes fills the whole view vertically */
 	display: flex;
 	flex-direction: column;
