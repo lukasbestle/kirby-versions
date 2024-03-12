@@ -1,13 +1,15 @@
 {
-	"name": "lukasbestle/kirby-versions",
+	"name": "nerdcel/kirby-versions",
 	"description": "Versions Plugin for Kirby",
 	"license": "MIT",
 	"type": "kirby-plugin",
-	"version": "2.0.1",
 	"authors": [
 		{
 			"name": "Lukas Bestle",
 			"email": "project-kirbyversions@lukasbestle.com"
+		}, {
+			"name": "Marcel Hieke",
+			"email": "office@marcelhieke.com"
 		}
 	],
 	"require": {
@@ -27,7 +29,7 @@
 		}
 	},
 	"extra": {
-		"installer-name": "versions",
+		"installer-name": "kirby-versions-extended",
 		"kirby-cms-path": false
 	},
 	"scripts": {
