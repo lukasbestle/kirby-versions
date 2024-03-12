@@ -19,6 +19,8 @@ return [
 
 	'versions.button.copyLink' => 'Copy link',
 	'versions.button.create' => 'Create version',
+	'versions.button.uncheckall' => 'Uncheck all',
+	'versions.button.checkall' => 'Check all',
 	'versions.button.delete' => 'Delete',
 	'versions.button.deploy' => 'Deploy',
 	'versions.button.download' => 'Download',

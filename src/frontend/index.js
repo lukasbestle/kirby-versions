@@ -1,5 +1,6 @@
 // Vue components
 import Changes from "./components/Misc/Changes.vue";
+import Stages from "./components/Misc/Stages.vue";
 import CreateErrorDialog from "./components/Dialogs/CreateErrorDialog.vue";
 import CreateDialog from "./components/Dialogs/CreateDialog.vue";
 import DeleteDialog from "./components/Dialogs/DeleteDialog.vue";
@@ -21,6 +22,7 @@ panel.plugin("lukasbestle/versions", {
 		"k-table-lbvs-instance-names-cell": InstanceNamesCell,
 		"k-table-lbvs-version-label-cell": VersionLabelCell,
 		"lbvs-changes": Changes,
+		"lbvs-stages": Stages,
 		"lbvs-create-error-dialog": CreateErrorDialog,
 		"lbvs-create-dialog": CreateDialog,
 		"lbvs-delete-dialog": DeleteDialog,

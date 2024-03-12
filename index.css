@@ -1,1 +1,202 @@
-.lbvs-changes li{padding-left:1.2em;position:relative}.lbvs-changes li span{position:absolute;left:0;font-family:var(--font-mono);font-weight:700}.lbvs-changes li span[data-status="+"],.lbvs-changes li span[data-status=C]{color:var(--color-positive)}.lbvs-changes li span[data-status="-"]{color:var(--color-negative)}.lbvs-changes li span[data-status=M],.lbvs-changes li span[data-status=R]{color:var(--color-notice)}.lbvs-create-error-dialog{line-height:1.5}.lbvs-create-error-dialog-message{margin-bottom:1rem;color:var(--color-negative)}.lbvs-create-error-dialog-list li{margin-left:1.2rem;list-style:disc}.lbvs-create-error-dialog-list span{color:var(--color-text-light)}.lbvs-create-changes{margin-bottom:2.25rem}.lbvs-version-delete-dialog{line-height:1.5}.lbvs-instance-name{display:inline-block;padding:0 .3em;border-radius:var(--rounded);color:var(--color-text)}strong.lbvs-instance-name{padding:.2em .4em}.lbvs-instance-names-cell{line-height:1.5;padding:.325rem .75rem}.lbvs-instance-names-cell .lbvs-instance-name{margin-top:.1625rem;margin-bottom:.1625rem;margin-right:.325rem}.lbvs-status{padding-top:1.5rem;padding-bottom:2rem;background:#2b2b2b;color:var(--color-white);border-radius:var(--rounded)}.lbvs-status .k-grid{grid-row-gap:1.5rem}.lbvs-status-instances li{padding:.8rem}.lbvs-status-instances li.current{background:var(--color-background);border-radius:var(--rounded);color:var(--color-text)}.lbvs-status-current{display:inline-block;margin-left:.5rem;padding:.1em .3em;border:1px solid var(--color-border);border-radius:var(--rounded-sm);font-size:var(--font-size-small)}.lbvs-status-instances .lbvs-version{margin-top:.4rem}.lbvs-status-changes{display:flex;flex-direction:column;height:100%}.lbvs-status-changes .lbvs-changes{height:100%;padding:.8rem;background:var(--color-background);border-radius:var(--rounded);color:var(--color-text)}@media screen and (min-width: 30em){.lbvs-status-instances li.current{border-top-right-radius:0;border-bottom-right-radius:0}.lbvs-status-changes .lbvs-changes{border-top-left-radius:0;border-bottom-left-radius:0}}.lbvs-version{line-height:1.4}.lbvs-version-details{font-size:var(--font-size-small)}.lbvs-version-details dd{display:inline}.lbvs-version-details dd:not(:last-child):after{content:" · ";color:var(--color-text-light)}.lbvs-version-label-cell{padding:.325rem .75rem}.lbvs-versions{padding-top:1.5rem}.lbvs-version-dialog .lbvs-version{margin-bottom:1.5rem}.lbvs-view>.k-loader{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+
+.lbvs-changes li {
+	padding-left: 1.2em;
+	position: relative;
+	display: flex;
+}
+.lbvs-changes li > span {
+	position: absolute;
+	left: 0;
+
+	font-family: var(--font-mono);
+	font-weight: bold;
+}
+.lbvs-changes li span[data-status="+"],
+.lbvs-changes li span[data-status="C"] {
+	color: var(--color-positive);
+}
+.lbvs-changes li span[data-status="-"] {
+	color: var(--color-negative);
+}
+.lbvs-changes li span[data-status="M"],
+.lbvs-changes li span[data-status="R"] {
+	color: var(--color-notice);
+}
+.lbvs-changes {
+  font-family: var(--font-family-mono);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 45svh;
+  min-height: 400px;
+  overflow: auto;
+}
+.lbvs-changes .k-input {
+  min-height: unset;
+  margin: 0 7px 0 0;
+  background: none;
+  outline: none;
+  border: none;
+}
+.lbvs-changes label {
+  line-height: 1.2;
+}
+.lbvs-changes li {
+  padding-left: 1.2em;
+  position: relative;
+  display: flex;
+}
+.lbvs-changes li > span {
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+.lbvs-changes li span[data-status="+"],
+.lbvs-changes li span[data-status=C] {
+  color: var(--color-positive);
+}
+.lbvs-changes li span[data-status="-"] {
+  color: var(--color-negative);
+}
+.lbvs-changes li span[data-status=M],
+.lbvs-changes li span[data-status=R] {
+  color: var(--color-notice);
+}
+.lbvs-create-error-dialog {
+	line-height: 1.5;
+}
+.lbvs-create-error-dialog-message {
+	margin-bottom: 1rem;
+
+	color: var(--color-negative);
+}
+.lbvs-create-error-dialog-list li {
+	margin-left: 1.2rem;
+
+	list-style: disc;
+}
+.lbvs-create-error-dialog-list span {
+	color: var(--color-text-light);
+}
+
+.lbvs-create-changes {
+	margin-bottom: 2.25rem;
+}
+
+.lbvs-version-delete-dialog {
+	line-height: 1.5;
+}
+
+.lbvs-instance-name {
+	display: inline-block;
+	padding: 0 0.3em;
+
+	border-radius: var(--rounded);
+	color: var(--color-text);
+}
+strong.lbvs-instance-name {
+	padding: 0.2em 0.4em;
+}
+
+.lbvs-instance-names-cell {
+	line-height: 1.5;
+	padding: 0.325rem 0.75rem;
+}
+.lbvs-instance-names-cell .lbvs-instance-name {
+	margin-top: 0.1625rem;
+	margin-bottom: 0.1625rem;
+	margin-right: 0.325rem;
+}
+
+.lbvs-status {
+	padding-top: 1.5rem;
+	padding-bottom: 2rem;
+
+	background: #2b2b2b;
+	color: var(--color-white);
+	border-radius: var(--rounded);
+}
+.lbvs-status .k-grid {
+	/* gap between the columns on mobile */
+	grid-row-gap: 1.5rem;
+}
+.lbvs-status-instances li {
+	padding: 0.8rem;
+}
+.lbvs-status-instances li.current {
+	background: var(--color-background);
+	border-radius: var(--rounded);
+	color: var(--color-text);
+}
+.lbvs-status-current {
+	display: inline-block;
+	margin-left: 0.5rem;
+	padding: 0.1em 0.3em;
+
+	border: 1px solid var(--color-border);
+	border-radius: var(--rounded-sm);
+
+	font-size: var(--font-size-small);
+}
+.lbvs-status-instances .lbvs-version {
+	margin-top: 0.4rem;
+}
+.lbvs-status-changes {
+	/* ensure the list of changes fills the whole view vertically */
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+.lbvs-status-changes .lbvs-changes {
+	height: 100%;
+	padding: 0.8rem;
+
+	background: var(--color-background);
+	border-radius: var(--rounded);
+	color: var(--color-text);
+}
+
+/* no rounded corners between instances and changes columns,
+   unless the columns are displayed vertically (on mobile) */
+@media screen and (min-width: 30em) {
+.lbvs-status-instances li.current {
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+}
+.lbvs-status-changes .lbvs-changes {
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+}
+}
+
+.lbvs-version {
+	line-height: 1.4;
+}
+.lbvs-version-details {
+	font-size: var(--font-size-small);
+}
+.lbvs-version-details dd {
+	display: inline;
+}
+.lbvs-version-details dd:not(:last-child)::after {
+	content: " · ";
+
+	color: var(--color-text-light);
+}
+
+.lbvs-version-label-cell {
+	padding: 0.325rem 0.75rem;
+}
+
+.lbvs-versions {
+	padding-top: 1.5rem;
+}
+.lbvs-version-dialog .lbvs-version {
+  margin-bottom: 1.5rem;
+}
+.lbvs-view > .k-loader {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}

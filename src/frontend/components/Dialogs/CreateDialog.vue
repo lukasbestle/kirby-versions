@@ -13,7 +13,7 @@
 						:label="$t('versions.label.changes')"
 						class="lbvs-create-changes"
 					>
-						<lbvs-changes :changes="stagedChanges" />
+						<lbvs-stages :to-stage="toStage" />
 					</k-field>
 				</template>
 			</k-form>
@@ -29,7 +29,7 @@ export default {
 		return {
 			instance: null,
 			inProgress: false,
-			stagedChanges: {}
+			toStage: {}
 		};
 	},
 	computed: {
@@ -59,6 +59,12 @@ export default {
 					throw this.$t("field.required");
 				}
 
+				// stage list of changes
+				await this.$store.dispatch({
+					type: "versions/addChangesToStage",
+					changes: this.toStage
+				});
+
 				await this.$store.dispatch({
 					type: "versions/createVersion",
 					instance: this.instance,
@@ -73,21 +79,9 @@ export default {
 				this.inProgress = false;
 			}
 		},
-		async open(instance) {
+		open(instance, toStage) {
 			this.instance = instance;
-
-			try {
-				this.stagedChanges = await this.$store.dispatch({
-					type: "versions/prepareVersionCreation",
-					instance: this.instance
-				});
-			} catch (e) {
-				if (e.key === "error.versions.lockFiles") {
-					return this.$refs.errorDialog.open(e);
-				}
-
-				throw e;
-			}
+			this.toStage = toStage;
 
 			this.$refs.dialog.open();
 		}

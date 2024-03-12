@@ -2,6 +2,7 @@ export default (app) => ({
 	namespaced: true,
 	state: {
 		data: {
+			markedChangesForStaging: {},
 			instances: {},
 			versions: {}
 		}
@@ -14,14 +15,39 @@ export default (app) => ({
 			return Object.values(state.data.instances).find(
 				(instance) => instance.isCurrent
 			);
+		},
+
+		currentChanges(state) {
+			return state.data.markedChangesForStaging;
 		}
 	},
 	mutations: {
 		SET_DATA(state, { instances, versions }) {
 			state.data.instances = instances;
 			state.data.versions = versions;
+		},
+
+		SET_CHANGES(state, { path, status }) {
+			Vue.set(state.data.markedChangesForStaging, path, status)
+		},
+
+		UNCHECK_ALL(state) {
+			Vue.set(state.data, 'markedChangesForStaging', {})
+		},
+
+		CHECK_ALL(state) {
+			const changes = Object.values(state.data.instances).find(
+				(instance) => instance.isCurrent
+			).changes;
+
+			Vue.set(state.data, 'markedChangesForStaging', changes)
+		},
+
+		REMOVE_CHANGES(state, { path }) {
+			Vue.delete(state.data.markedChangesForStaging, path);
 		}
 	},
+
 	actions: {
 		/**
 		 * Initialize the plugin data from the API
@@ -40,6 +66,16 @@ export default (app) => ({
 		 */
 		async prepareVersionCreation(context, { instance }) {
 			return await app.$api.post("versions/prepareCreation", { instance });
+		},
+
+		/**
+		 * Stage changes
+		 * Stage changes for version creation
+		 *
+		 * @param {object} changes List of changes to stage
+		 */
+		async addChangesToStage({ commit }, { changes }) {
+			await app.$api.post("versions/addChanges", { changes });
 		},
 
 		/**
@@ -89,6 +125,22 @@ export default (app) => ({
 		 */
 		async exportVersion(context, { version }) {
 			return await app.$api.post("versions/versions/" + version + "/export");
+		},
+
+		setChanges({ commit }, { path, status }) {
+			if (status === false) {
+				commit("REMOVE_CHANGES", { path });
+				return;
+			}
+			return commit("SET_CHANGES", { path, status });
+		},
+
+		uncheckAll({ commit }) {
+			commit("UNCHECK_ALL");
+		},
+
+		checkAll({ commit }) {
+			commit("CHECK_ALL");
 		}
 	}
 });

@@ -39,6 +39,26 @@
 						</k-label>
 
 						<k-button
+							v-if="canCheck"
+							icon="undo"
+							size="xs"
+							:disabled="canCheck === false"
+							@click="onUncheck"
+						>
+							{{ $t("versions.button.uncheckall") }}
+						</k-button>
+
+						<k-button
+							v-if="canUncheck"
+							icon="wand"
+							size="xs"
+							:disabled="canUncheck === false"
+							@click="onCheckall"
+						>
+							{{ $t("versions.button.checkall") }}
+						</k-button>
+
+						<k-button
 							icon="add"
 							size="xs"
 							:disabled="canCreateVersion === false"
@@ -59,23 +79,50 @@
 
 <script>
 export default {
+	emits: ['uncheck'],
 	computed: {
 		canCreateVersion() {
 			// user must have the create permission and
 			// there needs to be at least one change to commit
 			return (
 				this.$permissions["lukasbestle.versions"].create === true &&
-				Object.keys(this.currentChanges).length > 0
+				Object.keys(this.markedChanges).length > 0
+			);
+		},
+		canCheck() {
+			// user must have the create permission and
+			// there needs to be at least one change to commit
+			return (
+				this.$permissions["lukasbestle.versions"].create === true &&
+				Object.keys(this.markedChanges).length > 0
+			);
+		},
+		canUncheck() {
+			// user must have the create permission and
+			// there needs to be at least one change to commit
+			return (
+				this.$permissions["lukasbestle.versions"].create === true &&
+				!Object.keys(this.markedChanges).length > 0
 			);
 		},
 		currentChanges() {
 			return this.$store.getters["versions/currentInstance"].changes;
+		},
+		markedChanges() {
+			return this.$store.getters["versions/currentChanges"];
 		}
 	},
 	methods: {
+		onUncheck() {
+			this.$store.dispatch("versions/uncheckAll");
+		},
+		onCheckall() {
+			this.$store.dispatch("versions/checkAll");
+		},
 		onCreate() {
 			let instance = this.$store.getters["versions/currentInstance"].name;
-			return this.$refs.createDialog.open(instance);
+			const toStage = this.$store.getters["versions/currentChanges"];
+			return this.$refs.createDialog.open(instance, toStage);
 		}
 	}
 };
