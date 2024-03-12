@@ -1,25 +1,23 @@
 <template>
 	<div class="lbvs-versions">
-		<k-view>
-			<header class="k-section-header">
-				<k-headline>
-					{{ $t("versions.label.versions") }}
-				</k-headline>
-			</header>
+		<header class="k-section-header">
+			<k-label type="section">
+				{{ $t("versions.label.versions") }}
+			</k-label>
+		</header>
 
-			<k-items
-				v-if="items.length"
-				:columns="columns"
-				:items="items"
-				layout="table"
-				:sortable="false"
-				@option="onOption"
-			/>
+		<k-items
+			v-if="items.length"
+			:columns="columns"
+			:items="items"
+			layout="table"
+			:sortable="false"
+			@option="onOption"
+		/>
 
-			<k-empty v-else icon="protected" layout="table">
-				{{ $t("versions.label.empty") }}
-			</k-empty>
-		</k-view>
+		<k-empty v-else icon="protected" layout="table">
+			{{ $t("versions.label.empty") }}
+		</k-empty>
 
 		<lbvs-export-dialog ref="exportDialog" />
 		<lbvs-deploy-dialog ref="deployDialog" />

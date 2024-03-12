@@ -48,10 +48,6 @@ export default {
 </script>
 
 <style>
-.lbvs-changes {
-	font-family: var(--font-family-mono);
-}
-
 .lbvs-changes li {
 	padding-inline-start: 1.2em;
 	position: relative;
@@ -62,6 +58,7 @@ export default {
 	position: absolute;
 	inset-inline-start: 0;
 
+	font-family: var(--font-mono);
 	font-weight: bold;
 }
 
