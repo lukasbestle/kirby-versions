@@ -19,6 +19,8 @@ return [
 
 	'versions.button.copyLink' => 'Copier le lien',
 	'versions.button.create' => 'Créer une version',
+	'versions.button.uncheckall' => 'Tout décocher',
+	'versions.button.checkall' => 'Tout cocher',
 	'versions.button.delete' => 'Supprimer',
 	'versions.button.deploy' => 'Déployer',
 	'versions.button.download' => 'Télécharger',

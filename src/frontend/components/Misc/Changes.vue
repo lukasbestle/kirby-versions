@@ -1,8 +1,8 @@
 <template>
-	<ul class="lbvs-changes">
+	<ul v-if="ready" class="lbvs-changes">
 		<li v-for="(status, path) in changes" :key="path">
 			<div>
-				<k-input :id="path" :name="path" :value="status" :checked="status !== false" type="checkbox" @input="($event) => updateChange(path, status, $event)"/>
+				<k-input :id="path" :name="path" :value="status" :checked="typeof markedChangesForStaging[path] !== 'undefined'" type="checkbox" @input="($event) => updateChange(path, status, $event)"/>
 			</div>
 			<span
 				:data-status="status"
@@ -17,13 +17,19 @@
 
 <script>
 export default {
+	data() {
+		return {
+			ready: false
+		}
+	},
+
 	props: {
 		changes: Object
 	},
 
 	computed: {
 		markedChangesForStaging () {
-			return this.$store.state.versions.data.markedChangesForStaging;
+			return this.$store.getters["versions/currentChanges"];
 		}
 	},
 
@@ -34,6 +40,8 @@ export default {
 				status: this.changes[change]
 			});
 		}
+
+		this.ready = true;
 	},
 
 	methods: {
@@ -42,6 +50,16 @@ export default {
 				path: path,
 				status: checked ? state : false
 			});
+		}
+	},
+
+	watch: {
+		markedChangesForStaging: {
+			handler(val) {
+				console.log(val);
+			},
+			deep: true,
+			immediate: true
 		}
 	}
 };

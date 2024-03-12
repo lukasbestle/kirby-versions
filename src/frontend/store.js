@@ -28,13 +28,26 @@ export default (app) => ({
 		},
 
 		SET_CHANGES(state, { path, status }) {
-			state.data.markedChangesForStaging[path] = status;
+			Vue.set(state.data.markedChangesForStaging, path, status)
+		},
+
+		UNCHECK_ALL(state) {
+			Vue.set(state.data, 'markedChangesForStaging', {})
+		},
+
+		CHECK_ALL(state) {
+			const changes = Object.values(state.data.instances).find(
+				(instance) => instance.isCurrent
+			).changes;
+
+			Vue.set(state.data, 'markedChangesForStaging', changes)
 		},
 
 		REMOVE_CHANGES(state, { path }) {
-			delete state.data.markedChangesForStaging[path];
+			Vue.delete(state.data.markedChangesForStaging, path);
 		}
 	},
+
 	actions: {
 		/**
 		 * Initialize the plugin data from the API
@@ -120,6 +133,14 @@ export default (app) => ({
 				return;
 			}
 			return commit("SET_CHANGES", { path, status });
+		},
+
+		uncheckAll({ commit }) {
+			commit("UNCHECK_ALL");
+		},
+
+		checkAll({ commit }) {
+			commit("CHECK_ALL");
 		}
 	}
 });

@@ -20,9 +20,27 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .lbvs-changes {
 	font-family: var(--font-family-mono);
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	max-height: 45svh;
+	min-height: 400px;
+	overflow: auto;
+
+	.k-input {
+		min-height: unset;
+		margin: 0 7px 0 0;
+		background: none;
+		outline: none;
+		border: none;
+	}
+
+	label {
+		line-height: 1.2;
+	}
 }
 
 .lbvs-changes li {
