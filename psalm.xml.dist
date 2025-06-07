@@ -5,6 +5,7 @@
 	xmlns="https://getpsalm.org/schema/config"
 	xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
 
+	autoloader="autoload.php"
 	errorLevel="3"
 	resolveFromConfigFile="true"
 >
