@@ -91,7 +91,7 @@ class Instances extends Collection
 	 */
 	public function findOrException(string $name): Instance
 	{
-		$instance = $this->find($name);
+		$instance = $this->findByKey($name);
 		if (!$instance) {
 			throw new NotFoundException([
 				'key'  => 'versions.notFound.instance',

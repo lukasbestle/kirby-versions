@@ -107,7 +107,7 @@ class Versions extends Collection
 	 */
 	public function findOrException(string $name): Version
 	{
-		$version = $this->find($name);
+		$version = $this->findByKey($name);
 		if (!$version) {
 			throw new NotFoundException([
 				'key'  => 'versions.notFound.version',
