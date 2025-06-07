@@ -16,6 +16,7 @@ use Kirby\Toolkit\Str;
  * @copyright Lukas Bestle
  * @license   https://opensource.org/licenses/MIT
  *
+ * @extends \Kirby\Toolkit\Collection<\LukasBestle\Versions\Version>
  * @method \LukasBestle\Versions\Version findBy(string $attribute, $value)
  * @method \LukasBestle\Versions\Version get($key, $default = null)
  */

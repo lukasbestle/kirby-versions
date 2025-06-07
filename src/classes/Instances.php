@@ -18,6 +18,7 @@ use Kirby\Toolkit\Str;
  * @copyright Lukas Bestle
  * @license   https://opensource.org/licenses/MIT
  *
+ * @extends \Kirby\Toolkit\Collection<\LukasBestle\Versions\Instance>
  * @method \LukasBestle\Versions\Instance get($key, $default = null)
  */
 class Instances extends Collection
