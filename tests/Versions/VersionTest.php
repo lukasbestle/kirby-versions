@@ -165,15 +165,10 @@ class VersionTest extends TestCase
 	 * @covers ::creatorName
 	 * @covers ::label
 	 * @covers ::name
+	 * @covers ::normalizeCreated
+	 * @covers ::normalizeCreatorEmail
+	 * @covers ::normalizeCreatorName
 	 * @covers ::originInstance
-	 * @covers ::setCommit
-	 * @covers ::setCreated
-	 * @covers ::setCreatorEmail
-	 * @covers ::setCreatorName
-	 * @covers ::setLabel
-	 * @covers ::setName
-	 * @covers ::setOriginInstance
-	 * @covers ::setPlugin
 	 */
 	public function testMeta()
 	{
@@ -193,11 +188,15 @@ class VersionTest extends TestCase
 		$this->assertNull($version->originInstance());
 
 		// optional properties
-		$version = $version->clone([
+		$version = new Version([
+			'commit'         => 'abcdefg',
 			'created'        => 1234567890,
 			'creatorEmail'   => 'test@example.com',
 			'creatorName'    => 'Test User',
-			'originInstance' => 'Test Instance'
+			'label'          => 'Test Version',
+			'name'           => 'test',
+			'originInstance' => 'Test Instance',
+			'plugin'         => $this->plugin
 		]);
 		$this->assertSame(1234567890, $version->created());
 		$this->assertSame('test@example.com', $version->creatorEmail());
@@ -205,36 +204,45 @@ class VersionTest extends TestCase
 		$this->assertSame('Test Instance', $version->originInstance());
 
 		// property normalization I
-		$version = $version->clone([
+		$version = new Version([
+			'commit'       => 'abcdefg',
 			'created'      => '2020-01-02 03:04',
-			'creatorEmail' => '<another-test@example.com>'
+			'creatorEmail' => '<another-test@example.com>',
+			'label'        => 'Test Version',
+			'name'         => 'test',
+			'plugin'       => $this->plugin
 		]);
 		$this->assertSame(strtotime('2020-01-02 03:04'), $version->created());
 		$this->assertSame('another-test@example.com', $version->creatorEmail());
 
 		// property normalization II
-		$version = $version->clone([
+		$version = new Version([
+			'commit'       => 'abcdefg',
+			'created'      => '2020-01-02 03:04',
 			'creatorEmail' => '',
-			'creatorName'  => ''
+			'creatorName'  => '',
+			'label'        => 'Test Version',
+			'name'         => 'test',
+			'plugin'       => $this->plugin
 		]);
 		$this->assertNull($version->creatorEmail());
 		$this->assertNull($version->creatorName());
 	}
 
 	/**
-	 * @covers ::setCreated
+	 * @covers ::normalizeCreated
 	 */
-	public function testSetCreatedError()
+	public function testNormalizeCreatedError()
 	{
 		$this->expectException('Kirby\Exception\InvalidArgumentException');
 		$this->expectExceptionMessage('Internal error in the Versions plugin (error code version-invalid-created-value)');
 
 		new Version([
-			'commit' => 'abcdefg',
+			'commit'  => 'abcdefg',
 			'created' => 'this is not a timestamp',
-			'label'  => 'Test Version',
-			'name'   => 'test',
-			'plugin' => $this->plugin
+			'label'   => 'Test Version',
+			'name'    => 'test',
+			'plugin'  => $this->plugin
 		]);
 	}
 

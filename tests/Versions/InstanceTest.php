@@ -47,7 +47,12 @@ class InstanceTest extends TestCase
 			'Git repo, please either initialize a new repo or connect it as a worktree'
 		);
 
-		$this->instance->clone(['contentRoot' => '/dev/null']);
+		new Instance([
+			'name'        => 'Test Instance',
+			'contentRoot' => '/dev/null',
+			'color'       => 'black',
+			'plugin'      => $this->plugin
+		]);
 	}
 
 	/**
@@ -123,8 +128,11 @@ class InstanceTest extends TestCase
 		$this->assertTrue($this->instance->isCurrent());
 
 		mkdir($this->contentRoot1 . '/dir');
-		$instance = $this->instance->clone([
-			'contentRoot' => $this->contentRoot1 . '/dir'
+		$instance = new Instance([
+			'name'          => 'Test Instance',
+			'contentRoot'   => $this->contentRoot1 . '/dir',
+			'color'         => 'black',
+			'plugin'        => $this->plugin
 		]);
 		$this->assertFalse($instance->isCurrent());
 	}
@@ -135,11 +143,7 @@ class InstanceTest extends TestCase
 	 * @covers ::contentRoot
 	 * @covers ::currentCommit
 	 * @covers ::name
-	 * @covers ::setColor
-	 * @covers ::setContentRoot
 	 * @covers ::setCurrentCommit
-	 * @covers ::setName
-	 * @covers ::setPlugin
 	 */
 	public function testMeta()
 	{
@@ -149,8 +153,12 @@ class InstanceTest extends TestCase
 		$this->assertSame('Test Instance', $this->instance->name());
 
 		// optional property
-		$instance = $this->instance->clone([
-			'currentCommit' => 'abcdefg'
+		$instance = new Instance([
+			'name'          => 'Test Instance',
+			'contentRoot'   => $this->contentRoot1,
+			'currentCommit' => 'abcdefg',
+			'color'         => 'black',
+			'plugin'        => $this->plugin
 		]);
 		$this->assertSame('abcdefg', $instance->currentCommit());
 	}

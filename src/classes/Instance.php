@@ -6,7 +6,6 @@ use Kirby\Data\Data;
 use Kirby\Exception\Exception;
 use Kirby\Exception\LogicException;
 use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Properties;
 
 /**
  * Instance
@@ -20,8 +19,6 @@ use Kirby\Toolkit\Properties;
  */
 class Instance
 {
-	use Properties;
-
 	/**
 	 * Cache for the changes object for this instance
 	 */
@@ -40,7 +37,7 @@ class Instance
 	/**
 	 * Current commit of this instance
 	 */
-	protected string|null $currentCommit = null;
+	protected string|null $currentCommit;
 
 	/**
 	 * Instance name that is displayed in the Panel
@@ -59,7 +56,11 @@ class Instance
 	 */
 	public function __construct(array $props)
 	{
-		$this->setProperties($props);
+		$this->color         = $props['color'];
+		$this->contentRoot   = rtrim($props['contentRoot'], '/\\');
+		$this->currentCommit = $props['currentCommit'] ?? null;
+		$this->name          = $props['name'];
+		$this->plugin        = $props['plugin'];
 
 		// validate that the instance has a Git repo set up
 		try {
@@ -279,16 +280,18 @@ class Instance
 	 */
 	public function toArray(): array
 	{
-		$array = $this->propertiesToArray();
-		$array['changes']   = $this->changes()->overall();
-		$array['isCurrent'] = $this->isCurrent();
-
 		$version = $this->version();
-		$array['version']      = ($version !== null)? $version->name() : null;
-		$array['versionLabel'] = ($version !== null)? $version->label() : null;
 
-		ksort($array);
-		return $array;
+		return [
+			'changes'       => $this->changes()->overall(),
+			'color'         => $this->color(),
+			'contentRoot'   => $this->contentRoot(),
+			'currentCommit' => $this->currentCommit(),
+			'isCurrent'     => $this->isCurrent(),
+			'name'          => $this->name(),
+			'version'       => ($version !== null) ? $version->name() : null,
+			'versionLabel'  => ($version !== null) ? $version->label() : null,
+		];
 	}
 
 	/**
@@ -301,41 +304,5 @@ class Instance
 		}
 
 		return $this->plugin->versions()->findBy('commit', $this->currentCommit());
-	}
-
-	/**
-	 * Sets the CSS color for display in the Panel
-	 */
-	protected function setColor(string $color): self
-	{
-		$this->color = $color;
-		return $this;
-	}
-
-	/**
-	 * Sets the path to the content directory
-	 */
-	protected function setContentRoot(string $contentRoot): self
-	{
-		$this->contentRoot = rtrim($contentRoot, '/\\');
-		return $this;
-	}
-
-	/**
-	 * Sets the instance name that is displayed in the Panel
-	 */
-	protected function setName(string $name): self
-	{
-		$this->name = $name;
-		return $this;
-	}
-
-	/**
-	 * Sets the instance of the Plugin class
-	 */
-	protected function setPlugin(Plugin $plugin): self
-	{
-		$this->plugin = $plugin;
-		return $this;
 	}
 }

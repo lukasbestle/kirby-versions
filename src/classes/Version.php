@@ -8,7 +8,6 @@ use Kirby\Filesystem\Dir;
 use Kirby\Filesystem\F;
 use Kirby\Toolkit\Collection;
 use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Properties;
 
 /**
  * Version
@@ -22,8 +21,6 @@ use Kirby\Toolkit\Properties;
  */
 class Version
 {
-	use Properties;
-
 	/**
 	 * Commit hash of this version
 	 */
@@ -32,17 +29,17 @@ class Version
 	/**
 	 * Creation timestamp
 	 */
-	protected int|null $created = null;
+	protected int|null $created;
 
 	/**
 	 * Email address of the creator
 	 */
-	protected string|null $creatorEmail = null;
+	protected string|null $creatorEmail;
 
 	/**
 	 * Name of the creator
 	 */
-	protected string|null $creatorName = null;
+	protected string|null $creatorName;
 
 	/**
 	 * Custom label
@@ -58,7 +55,7 @@ class Version
 	 * Name of the instance where the version was
 	 * originally created
 	 */
-	protected string|null $originInstance = null;
+	protected string|null $originInstance;
 
 	/**
 	 * Instance of the Plugin class
@@ -70,7 +67,14 @@ class Version
 	 */
 	public function __construct(array $props)
 	{
-		$this->setProperties($props);
+		$this->commit         = $props['commit'];
+		$this->created        = $this->normalizeCreated($props['created'] ?? null);
+		$this->creatorEmail   = $this->normalizeCreatorEmail($props['creatorEmail'] ?? null);
+		$this->creatorName    = $this->normalizeCreatorName($props['creatorName'] ?? null);
+		$this->label          = $props['label'];
+		$this->name           = $props['name'];
+		$this->originInstance = $props['originInstance'] ?? null;
+		$this->plugin         = $props['plugin'];
 	}
 
 	/**
@@ -229,26 +233,22 @@ class Version
 	 */
 	public function toArray(): array
 	{
-		$array = $this->propertiesToArray();
-		$array['instances'] = $this->instances()->keys();
-
-		ksort($array);
-		return $array;
+		return [
+			'commit'         => $this->commit(),
+			'created'        => $this->created(),
+			'creatorEmail'   => $this->creatorEmail(),
+			'creatorName'    => $this->creatorName(),
+			'instances'      => $this->instances()->keys(),
+			'label'          => $this->label(),
+			'name'           => $this->name(),
+			'originInstance' => $this->originInstance(),
+		];
 	}
 
 	/**
-	 * Sets the commit hash of this version
+	 * Normalizes the creation timestamp for the property
 	 */
-	protected function setCommit(string $commit): self
-	{
-		$this->commit = $commit;
-		return $this;
-	}
-
-	/**
-	 * Sets the creation timestamp
-	 */
-	protected function setCreated(int|string|null $created = null): self
+	protected function normalizeCreated(int|string|null $created): int|null
 	{
 		if (is_string($created) === true) {
 			$created = $created ? strtotime($created) : null;
@@ -261,76 +261,34 @@ class Version
 			]);
 		}
 
-		$this->created = $created;
-		return $this;
+		return $created;
 	}
 
 	/**
-	 * Sets the email address of the creator
+	 * Normalizes the email address of the creator for the property
 	 */
-	protected function setCreatorEmail(string|null $creatorEmail = null): self
+	protected function normalizeCreatorEmail(string|null $creatorEmail): string|null
 	{
 		// Git will output an empty string if the value is not available
-		if ($creatorEmail === '') {
-			$creatorEmail = null;
-		} elseif ($creatorEmail !== null) {
-			// trim the angle brackets around the email address
-			// that come from Git's output
-			$creatorEmail = trim($creatorEmail, '<>');
+		if ($creatorEmail === '' || $creatorEmail === null) {
+			return null;
 		}
 
-		$this->creatorEmail = $creatorEmail;
-		return $this;
+		// trim the angle brackets around the email address
+		// that come from Git's output
+		return trim($creatorEmail, '<>');
 	}
 
 	/**
-	 * Sets the name of the creator
+	 * Normalizes the name of the creator for the property
 	 */
-	protected function setCreatorName(string|null $creatorName = null): self
+	protected function normalizeCreatorName(string|null $creatorName): string|null
 	{
 		// Git will output an empty string if the value is not available
 		if ($creatorName === '') {
-			$creatorName = null;
+			return null;
 		}
 
-		$this->creatorName = $creatorName;
-		return $this;
-	}
-
-	/**
-	 * Sets the custom label
-	 */
-	protected function setLabel(string $label): self
-	{
-		$this->label = $label;
-		return $this;
-	}
-
-	/**
-	 * Sets the unique version name
-	 */
-	protected function setName(string $name): self
-	{
-		$this->name = $name;
-		return $this;
-	}
-
-	/**
-	 * Sets the name of the instance where
-	 * the version was originally created
-	 */
-	protected function setOriginInstance(string|null $originInstance = null): self
-	{
-		$this->originInstance = $originInstance;
-		return $this;
-	}
-
-	/**
-	 * Sets the instance of the Plugin class
-	 */
-	protected function setPlugin(Plugin $plugin): self
-	{
-		$this->plugin = $plugin;
-		return $this;
+		return $creatorName;
 	}
 }
