@@ -233,7 +233,7 @@ class Changes
 
 		// unknown (= added to worktree, but not to index)
 		if ($status === '?') {
-			return ($mode === 'worktree')? '+' : null;
+			return ($mode === 'worktree') ? '+' : null;
 		}
 
 		// deleted
