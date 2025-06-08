@@ -24,15 +24,11 @@ class Versions extends Collection
 {
 	/**
 	 * Instance of the Plugin class
-	 *
-	 * @var \LukasBestle\Versions\Plugin
 	 */
-	protected $plugin;
+	protected Plugin $plugin;
 
 	/**
 	 * Class constructor
-	 *
-	 * @param \LukasBestle\Versions\Plugin $plugin
 	 *
 	 * @throws \Kirby\Exception\Exception If there is a Git error
 	 */
@@ -49,8 +45,6 @@ class Versions extends Collection
 
 	/**
 	 * Automatically cleans up old versions
-	 *
-	 * @return void
 	 *
 	 * @throws \Kirby\Exception\Exception If there is a Git error
 	 */
@@ -100,9 +94,6 @@ class Versions extends Collection
 	 * Returns the specified version or throws an
 	 * Exception if not found
 	 *
-	 * @param string $name
-	 * @return \LukasBestle\Versions\Version
-	 *
 	 * @throws \Kirby\Exception\NotFoundException If the instance was not found
 	 */
 	public function findOrException(string $name): Version
@@ -120,8 +111,6 @@ class Versions extends Collection
 
 	/**
 	 * Loads the current versions from the repository
-	 *
-	 * @return void
 	 *
 	 * @throws \Kirby\Exception\Exception If there is a Git error
 	 */

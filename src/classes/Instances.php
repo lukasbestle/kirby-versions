@@ -25,15 +25,11 @@ class Instances extends Collection
 {
 	/**
 	 * Instance of the Plugin class
-	 *
-	 * @var \LukasBestle\Versions\Plugin
 	 */
-	protected $plugin;
+	protected Plugin $plugin;
 
 	/**
 	 * Class constructor
-	 *
-	 * @param \LukasBestle\Versions\Plugin $plugin
 	 *
 	 * @throws \Kirby\Exception\Exception If there is a Git error
 	 * @throws \Kirby\Exception\Exception If the configuration is invalid
@@ -84,9 +80,6 @@ class Instances extends Collection
 	 * Returns the specified instance or throws an
 	 * Exception if not found
 	 *
-	 * @param string $name
-	 * @return \LukasBestle\Versions\Instance
-	 *
 	 * @throws \Kirby\Exception\NotFoundException If the instance was not found
 	 */
 	public function findOrException(string $name): Instance
@@ -106,8 +99,6 @@ class Instances extends Collection
 	 * Validates that all configured instances are connected
 	 * worktrees and have a detached head; the current commit
 	 * of each instance is set in the process
-	 *
-	 * @return void
 	 *
 	 * @throws \Kirby\Exception\Exception If there is a Git error
 	 * @throws \Kirby\Exception\Exception If the configuration is invalid

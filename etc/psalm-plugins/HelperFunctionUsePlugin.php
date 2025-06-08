@@ -11,7 +11,6 @@ class HelperFunctionUsePlugin implements \Psalm\Plugin\EventHandler\AfterFunctio
 {
 	/**
 	 * @SuppressWarnings(PHPMD.MissingImport)
-	 * @param AfterFunctionCallAnalysisEvent $event
 	 */
 	public static function afterFunctionCallAnalysis(AfterFunctionCallAnalysisEvent $event): void
 	{

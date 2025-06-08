@@ -7,7 +7,7 @@ use Kirby\Toolkit\F;
 use ZipArchive;
 
 /**
- * @coversDefaultClass LukasBestle\Versions\Version
+ * @coversDefaultClass \LukasBestle\Versions\Version
  */
 class VersionTest extends TestCase
 {
@@ -224,7 +224,7 @@ class VersionTest extends TestCase
 	/**
 	 * @covers ::setCreated
 	 */
-	public function testSetCreatedError1()
+	public function testSetCreatedError()
 	{
 		$this->expectException('Kirby\Exception\InvalidArgumentException');
 		$this->expectExceptionMessage('Internal error in the Versions plugin (error code version-invalid-created-value)');
@@ -232,23 +232,6 @@ class VersionTest extends TestCase
 		new Version([
 			'commit' => 'abcdefg',
 			'created' => 'this is not a timestamp',
-			'label'  => 'Test Version',
-			'name'   => 'test',
-			'plugin' => $this->plugin
-		]);
-	}
-
-	/**
-	 * @covers ::setCreated
-	 */
-	public function testSetCreatedError2()
-	{
-		$this->expectException('Kirby\Exception\InvalidArgumentException');
-		$this->expectExceptionMessage('Internal error in the Versions plugin (error code version-invalid-created-value)');
-
-		new Version([
-			'commit' => 'abcdefg',
-			'created' => [],
 			'label'  => 'Test Version',
 			'name'   => 'test',
 			'plugin' => $this->plugin

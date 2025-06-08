@@ -26,65 +26,47 @@ class Version
 
 	/**
 	 * Commit hash of this version
-	 *
-	 * @var string
 	 */
-	protected $commit;
+	protected string $commit;
 
 	/**
 	 * Creation timestamp
-	 *
-	 * @var int|null
 	 */
-	protected $created = null;
+	protected int|null $created = null;
 
 	/**
 	 * Email address of the creator
-	 *
-	 * @var string|null
 	 */
-	protected $creatorEmail = null;
+	protected string|null $creatorEmail = null;
 
 	/**
 	 * Name of the creator
-	 *
-	 * @var string|null
 	 */
-	protected $creatorName = null;
+	protected string|null $creatorName = null;
 
 	/**
 	 * Custom label
-	 *
-	 * @var string
 	 */
-	protected $label;
+	protected string $label;
 
 	/**
 	 * Unique version name
-	 *
-	 * @var string
 	 */
-	protected $name;
+	protected string $name;
 
 	/**
 	 * Name of the instance where the version was
 	 * originally created
-	 *
-	 * @var string|null
 	 */
-	protected $originInstance = null;
+	protected string|null $originInstance = null;
 
 	/**
 	 * Instance of the Plugin class
-	 *
-	 * @var \LukasBestle\Versions\Plugin
 	 */
-	protected $plugin;
+	protected Plugin $plugin;
 
 	/**
 	 * Class constructor
-	 *
-	 * @param array $props
 	 */
 	public function __construct(array $props)
 	{
@@ -93,8 +75,6 @@ class Version
 
 	/**
 	 * Returns the commit hash of this version
-	 *
-	 * @return string
 	 */
 	public function commit(): string
 	{
@@ -104,10 +84,8 @@ class Version
 	/**
 	 * Returns the creation timestamp;
 	 * only set if the tag is annotated
-	 *
-	 * @return int|null
 	 */
-	public function created(): ?int
+	public function created(): int|null
 	{
 		return $this->created;
 	}
@@ -115,10 +93,8 @@ class Version
 	/**
 	 * Returns the email address of the creator;
 	 * only set if the tag is annotated
-	 *
-	 * @return string|null
 	 */
-	public function creatorEmail(): ?string
+	public function creatorEmail(): string|null
 	{
 		return $this->creatorEmail;
 	}
@@ -126,18 +102,14 @@ class Version
 	/**
 	 * Returns the name of the creator;
 	 * only set if the tag is annotated
-	 *
-	 * @return string|null
 	 */
-	public function creatorName(): ?string
+	public function creatorName(): string|null
 	{
 		return $this->creatorName;
 	}
 
 	/**
 	 * Deletes the Git tag behind this version
-	 *
-	 * @return void
 	 *
 	 * @throws \Kirby\Exception\LogicException If the version cannot be deleted
 	 * @throws \Kirby\Exception\Exception If there is a Git error
@@ -158,9 +130,6 @@ class Version
 
 	/**
 	 * Deploys the version to a specified instance
-	 *
-	 * @param \LukasBestle\Versions\Instance $instance
-	 * @return void
 	 *
 	 * @throws \Kirby\Exception\Exception If there is a Git error
 	 * @throws \Kirby\Exception\Exception If there are changes that cannot
@@ -222,8 +191,6 @@ class Version
 	/**
 	 * Returns the list of instances that
 	 * currently use this version
-	 *
-	 * @return \Kirby\Toolkit\Collection
 	 */
 	public function instances(): Collection
 	{
@@ -232,8 +199,6 @@ class Version
 
 	/**
 	 * Returns the custom label
-	 *
-	 * @return string
 	 */
 	public function label(): string
 	{
@@ -242,8 +207,6 @@ class Version
 
 	/**
 	 * Returns the unique version name
-	 *
-	 * @return string
 	 */
 	public function name(): string
 	{
@@ -253,18 +216,14 @@ class Version
 	/**
 	 * Returns the name of the instance where
 	 * the version was originally created (if known)
-	 *
-	 * @return string|null
 	 */
-	public function originInstance(): ?string
+	public function originInstance(): string|null
 	{
 		return $this->originInstance;
 	}
 
 	/**
 	 * Returns the version data as array
-	 *
-	 * @return array
 	 *
 	 * @throws \Kirby\Exception\Exception If there is a Git error
 	 */
@@ -279,9 +238,6 @@ class Version
 
 	/**
 	 * Sets the commit hash of this version
-	 *
-	 * @param string $commit
-	 * @return self
 	 */
 	protected function setCommit(string $commit): self
 	{
@@ -291,13 +247,8 @@ class Version
 
 	/**
 	 * Sets the creation timestamp
-	 *
-	 * @param int|string|null $created
-	 * @return self
-	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the value cannot be parsed
 	 */
-	protected function setCreated($created = null): self
+	protected function setCreated(int|string|null $created = null): self
 	{
 		if (is_string($created) === true) {
 			$created = $created ? strtotime($created) : null;
@@ -316,11 +267,8 @@ class Version
 
 	/**
 	 * Sets the email address of the creator
-	 *
-	 * @param string|null $creatorEmail
-	 * @return self
 	 */
-	protected function setCreatorEmail(?string $creatorEmail = null): self
+	protected function setCreatorEmail(string|null $creatorEmail = null): self
 	{
 		// Git will output an empty string if the value is not available
 		if ($creatorEmail === '') {
@@ -337,11 +285,8 @@ class Version
 
 	/**
 	 * Sets the name of the creator
-	 *
-	 * @param string|null $creatorName
-	 * @return self
 	 */
-	protected function setCreatorName(?string $creatorName = null): self
+	protected function setCreatorName(string|null $creatorName = null): self
 	{
 		// Git will output an empty string if the value is not available
 		if ($creatorName === '') {
@@ -354,9 +299,6 @@ class Version
 
 	/**
 	 * Sets the custom label
-	 *
-	 * @param string $label
-	 * @return self
 	 */
 	protected function setLabel(string $label): self
 	{
@@ -366,9 +308,6 @@ class Version
 
 	/**
 	 * Sets the unique version name
-	 *
-	 * @param string $name
-	 * @return self
 	 */
 	protected function setName(string $name): self
 	{
@@ -379,11 +318,8 @@ class Version
 	/**
 	 * Sets the name of the instance where
 	 * the version was originally created
-	 *
-	 * @param string|null $originInstance
-	 * @return self
 	 */
-	protected function setOriginInstance(?string $originInstance = null): self
+	protected function setOriginInstance(string|null $originInstance = null): self
 	{
 		$this->originInstance = $originInstance;
 		return $this;
@@ -391,9 +327,6 @@ class Version
 
 	/**
 	 * Sets the instance of the Plugin class
-	 *
-	 * @param \LukasBestle\Versions\Plugin $plugin
-	 * @return self
 	 */
 	protected function setPlugin(Plugin $plugin): self
 	{

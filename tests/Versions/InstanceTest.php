@@ -6,7 +6,7 @@ use Kirby\Data\Data;
 use Kirby\Exception\LogicException;
 
 /**
- * @coversDefaultClass LukasBestle\Versions\Instance
+ * @coversDefaultClass \LukasBestle\Versions\Instance
  */
 class InstanceTest extends TestCase
 {

@@ -6,7 +6,7 @@ use Kirby\Exception\Exception;
 use ReflectionProperty;
 
 /**
- * @coversDefaultClass LukasBestle\Versions\Plugin
+ * @coversDefaultClass \LukasBestle\Versions\Plugin
  */
 class PluginTest extends TestCase
 {

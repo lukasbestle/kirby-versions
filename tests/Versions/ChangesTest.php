@@ -3,7 +3,7 @@
 namespace LukasBestle\Versions;
 
 /**
- * @covers LukasBestle\Versions\Changes
+ * @covers \LukasBestle\Versions\Changes
  */
 class ChangesTest extends TestCase
 {

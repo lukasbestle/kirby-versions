@@ -23,51 +23,37 @@ class Instance
 	use Properties;
 
 	/**
-	 * Changes object for this instance
-	 *
-	 * @var \LukasBestle\Versions\Changes|null
+	 * Cache for the changes object for this instance
 	 */
-	protected $changes;
+	protected Changes|null $changes = null;
 
 	/**
 	 * CSS color for display in the Panel
-	 *
-	 * @var string
 	 */
-	protected $color;
+	protected string $color;
 
 	/**
 	 * Path to the content directory
-	 *
-	 * @var string
 	 */
-	protected $contentRoot;
+	protected string $contentRoot;
 
 	/**
 	 * Current commit of this instance
-	 *
-	 * @var string|null
 	 */
-	protected $currentCommit = null;
+	protected string|null $currentCommit = null;
 
 	/**
 	 * Instance name that is displayed in the Panel
-	 *
-	 * @var string
 	 */
-	protected $name;
+	protected string $name;
 
 	/**
 	 * Instance of the Plugin class
-	 *
-	 * @var \LukasBestle\Versions\Plugin
 	 */
-	protected $plugin;
+	protected Plugin $plugin;
 
 	/**
 	 * Class constructor
-	 *
-	 * @param array $props
 	 *
 	 * @throws \Kirby\Exception\Exception If the configuration is invalid
 	 */
@@ -92,8 +78,6 @@ class Instance
 
 	/**
 	 * Returns the Changes object for this instance
-	 *
-	 * @return \LukasBestle\Versions\Changes
 	 */
 	public function changes(): Changes
 	{
@@ -106,8 +90,6 @@ class Instance
 
 	/**
 	 * Returns the CSS color for display in the Panel
-	 *
-	 * @return string
 	 */
 	public function color(): string
 	{
@@ -116,8 +98,6 @@ class Instance
 
 	/**
 	 * Returns the path to the content directory
-	 *
-	 * @return string
 	 */
 	public function contentRoot(): string
 	{
@@ -129,7 +109,6 @@ class Instance
 	 * prepared changes with `prepareCreation()`
 	 *
 	 * @param string $label Custom version label
-	 * @return \LukasBestle\Versions\Version
 	 *
 	 * @throws \Kirby\Exception\Exception If there is a Git error
 	 * @throws \Kirby\Exception\LogicException If there are no staged files
@@ -185,18 +164,14 @@ class Instance
 
 	/**
 	 * Returns the current commit of this instance
-	 *
-	 * @return string|null
 	 */
-	public function currentCommit(): ?string
+	public function currentCommit(): string|null
 	{
 		return $this->currentCommit;
 	}
 
 	/**
 	 * Returns whether the instance is the one of the current site
-	 *
-	 * @return bool
 	 */
 	public function isCurrent(): bool
 	{
@@ -205,8 +180,6 @@ class Instance
 
 	/**
 	 * Returns the instance name that is displayed in the Panel
-	 *
-	 * @return string
 	 */
 	public function name(): string
 	{
@@ -216,8 +189,6 @@ class Instance
 	/**
 	 * Prepares version creation by staging all
 	 * changes and checking if there are any lock files
-	 *
-	 * @return void
 	 *
 	 * @throws \Kirby\Exception\Exception If there is a Git error
 	 * @throws \Kirby\Exception\LogicException If there are no changed files
@@ -294,11 +265,8 @@ class Instance
 	/**
 	 * Sets the current commit of this instance
 	 * @internal
-	 *
-	 * @param string|null $currentCommit
-	 * @return self
 	 */
-	public function setCurrentCommit(?string $currentCommit = null): self
+	public function setCurrentCommit(string|null $currentCommit = null): self
 	{
 		$this->currentCommit = $currentCommit;
 		return $this;
@@ -306,8 +274,6 @@ class Instance
 
 	/**
 	 * Returns the instance data as array
-	 *
-	 * @return array
 	 *
 	 * @throws \Kirby\Exception\Exception If there is a Git error
 	 */
@@ -327,10 +293,8 @@ class Instance
 
 	/**
 	 * Returns the current version of this instance
-	 *
-	 * @return \LukasBestle\Versions\Version|null
 	 */
-	public function version(): ?Version
+	public function version(): Version|null
 	{
 		if ($this->currentCommit === null) {
 			return null;
@@ -341,9 +305,6 @@ class Instance
 
 	/**
 	 * Sets the CSS color for display in the Panel
-	 *
-	 * @param string $color
-	 * @return self
 	 */
 	protected function setColor(string $color): self
 	{
@@ -353,9 +314,6 @@ class Instance
 
 	/**
 	 * Sets the path to the content directory
-	 *
-	 * @param string $contentRoot
-	 * @return self
 	 */
 	protected function setContentRoot(string $contentRoot): self
 	{
@@ -365,9 +323,6 @@ class Instance
 
 	/**
 	 * Sets the instance name that is displayed in the Panel
-	 *
-	 * @param string $name
-	 * @return self
 	 */
 	protected function setName(string $name): self
 	{
@@ -377,9 +332,6 @@ class Instance
 
 	/**
 	 * Sets the instance of the Plugin class
-	 *
-	 * @param \LukasBestle\Versions\Plugin $plugin
-	 * @return self
 	 */
 	protected function setPlugin(Plugin $plugin): self
 	{

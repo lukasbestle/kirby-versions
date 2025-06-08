@@ -5,7 +5,7 @@ namespace LukasBestle\Versions;
 use ReflectionProperty;
 
 /**
- * @coversDefaultClass LukasBestle\Versions\Versions
+ * @coversDefaultClass \LukasBestle\Versions\Versions
  */
 class VersionsTest extends TestCase
 {

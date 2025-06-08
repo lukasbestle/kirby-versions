@@ -3,7 +3,7 @@
 namespace LukasBestle\Versions;
 
 /**
- * @coversDefaultClass LukasBestle\Versions\Instances
+ * @coversDefaultClass \LukasBestle\Versions\Instances
  */
 class InstancesTest extends TestCase
 {

@@ -21,41 +21,34 @@ class Changes
 	 *
 	 * @var array<string, string|null>
 	 */
-	protected $inIndex;
+	protected array $inIndex;
 
 	/**
 	 * Configured instance to get changes for
-	 *
-	 * @var \LukasBestle\Versions\Instance
 	 */
-	protected $instance;
+	protected Instance $instance;
 
 	/**
 	 * Cache for changes in the worktree
 	 *
 	 * @var array<string, string|null>
 	 */
-	protected $inWorktree;
+	protected array $inWorktree;
 
 	/**
 	 * Cache for changed Kirby lock files
 	 *
 	 * @var array<string>
 	 */
-	protected $lockFiles;
+	protected array $lockFiles;
 
 	/**
 	 * Instance of the Plugin class
-	 *
-	 * @var \LukasBestle\Versions\Plugin
 	 */
-	protected $plugin;
+	protected Plugin $plugin;
 
 	/**
 	 * Class constructor
-	 *
-	 * @param \LukasBestle\Versions\Plugin $plugin
-	 * @param \LukasBestle\Versions\Instance $instance
 	 */
 	public function __construct(Plugin $plugin, Instance $instance)
 	{
@@ -150,8 +143,6 @@ class Changes
 	/**
 	 * Loads the current changes from the worktree
 	 *
-	 * @return void
-	 *
 	 * @throws \Kirby\Exception\Exception If there is a Git error
 	 */
 	public function update(): void
@@ -198,15 +189,13 @@ class Changes
 	/**
 	 * Loads the current changes if this instance
 	 * is still in its initial state
-	 *
-	 * @return void
 	 */
 	protected function initialize(): void
 	{
 		if (
-			$this->inIndex === null ||
-			$this->inWorktree === null ||
-			$this->lockFiles === null
+			isset($this->inIndex) === false ||
+			isset($this->inWorktree) === false ||
+			isset($this->lockFiles) === false
 		) {
 			$this->update();
 		}
@@ -219,7 +208,7 @@ class Changes
 	 * @param string $mode `index` or `worktree`
 	 * @return string|null A single human-readable character or `null` for unmodified
 	 */
-	protected static function normalizeStatus(string $status, string $mode): ?string
+	protected static function normalizeStatus(string $status, string $mode): string|null
 	{
 		// unmodified
 		if ($status === ' ') {

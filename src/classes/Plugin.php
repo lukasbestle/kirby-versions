@@ -22,45 +22,35 @@ class Plugin
 {
 	/**
 	 * Singleton plugin instance
-	 *
-	 * @var self|null
 	 */
-	protected static $instance;
+	protected static self|null $instance = null;
 
 	/**
-	 * Collection of configured site instances
-	 *
-	 * @var \LukasBestle\Versions\Instances|null
+	 * Cache for the collection of configured site instances
 	 */
-	protected $instances;
+	protected Instances|null $instances = null;
 
 	/**
 	 * Kirby App instance
-	 *
-	 * @var \Kirby\Cms\App
 	 */
-	protected $kirby;
+	protected App $kirby;
 
 	/**
 	 * Whether the environment has already been validated
-	 *
-	 * @var bool
 	 */
-	protected $validated = false;
+	protected bool $validated = false;
 
 	/**
-	 * Collection of the existing versions
-	 *
-	 * @var \LukasBestle\Versions\Versions|null
+	 * Cache for the collection of the existing versions
 	 */
-	protected $versions;
+	protected Versions|null $versions = null;
 
 	/**
 	 * Class constructor
 	 *
 	 * @param \Kirby\Cms\App|null $kirby Kirby App instance to use (optional)
 	 */
-	public function __construct(?App $kirby = null)
+	public function __construct(App|null $kirby = null)
 	{
 		/** @psalm-suppress PossiblyNullPropertyAssignmentValue */
 		$this->kirby = $kirby ?? App::instance();
@@ -68,9 +58,6 @@ class Plugin
 
 	/**
 	 * Ensures that the current user has the specified permission
-	 *
-	 * @param string $permission
-	 * @return void
 	 *
 	 * @throws \Kirby\Exception\LogicException If no user is logged in
 	 * @throws \Kirby\Exception\PermissionException If the user does not have the required permission
@@ -88,8 +75,6 @@ class Plugin
 	/**
 	 * Ensures that the exports directory exists and
 	 * cleans all expired exports from the media folder
-	 *
-	 * @return void
 	 */
 	public function cleanExports(): void
 	{
@@ -109,8 +94,6 @@ class Plugin
 
 	/**
 	 * Returns the root of the exports directory
-	 *
-	 * @return string
 	 */
 	public function exportRoot(): string
 	{
@@ -119,8 +102,6 @@ class Plugin
 
 	/**
 	 * Returns the URL of the exports directory
-	 *
-	 * @return string
 	 */
 	public function exportUrl(): string
 	{
@@ -136,7 +117,7 @@ class Plugin
 	 *
 	 * @throws \Kirby\Exception\Exception If there is a Git error
 	 */
-	public function gitCommand(?Instance $instance, ...$arguments): string
+	public function gitCommand(Instance|null $instance, ...$arguments): string
 	{
 		// prepend the Git path and the repo path to the arguments
 		$path = $instance ? $instance->contentRoot() : $this->kirby()->roots()->content();
@@ -169,9 +150,6 @@ class Plugin
 	/**
 	 * Returns whether the current user has the specified permission
 	 *
-	 * @param string $permission
-	 * @return bool
-	 *
 	 * @throws \Kirby\Exception\LogicException If no user is logged in
 	 */
 	public function hasPermission(string $permission): bool
@@ -192,9 +170,8 @@ class Plugin
 	 * Returns the singleton plugin instance
 	 *
 	 * @param \Kirby\Cms\App|null $kirby Kirby App instance to use (optional)
-	 * @return self
 	 */
-	public static function instance(?App $kirby = null): self
+	public static function instance(App|null $kirby = null): self
 	{
 		if (
 			self::$instance !== null &&
@@ -208,8 +185,6 @@ class Plugin
 
 	/**
 	 * Returns the collection of configured site instances
-	 *
-	 * @return \LukasBestle\Versions\Instances
 	 *
 	 * @throws \Kirby\Exception\Exception If the environment validation failed
 	 */
@@ -225,8 +200,6 @@ class Plugin
 
 	/**
 	 * Returns the Kirby App instance
-	 *
-	 * @return \Kirby\Cms\App
 	 */
 	public function kirby(): App
 	{
@@ -237,9 +210,8 @@ class Plugin
 	 * Returns a plugin option value
 	 *
 	 * @param string $key Option key
-	 * @return mixed
 	 */
-	public function option(string $key)
+	public function option(string $key): mixed
 	{
 		return $this->kirby()->option('lukasbestle.versions.' . $key);
 	}
@@ -251,7 +223,6 @@ class Plugin
 	 * @param array $additionalData Data that gets merged with the plugin
 	 *                              data or returned when the user doesn't
 	 *                              have the `access` permission
-	 * @return array
 	 */
 	public function toApiData(array $additionalData = []): array
 	{
@@ -284,8 +255,6 @@ class Plugin
 
 	/**
 	 * Returns the plugin state as array
-	 *
-	 * @return array
 	 */
 	public function toArray(): array
 	{
@@ -303,8 +272,6 @@ class Plugin
 	/**
 	 * Validates the site's environment against
 	 * plugin requirements
-	 *
-	 * @return void
 	 *
 	 * @throws \Kirby\Exception\Exception If the environment validation failed
 	 */
@@ -342,8 +309,6 @@ class Plugin
 
 	/**
 	 * Returns the collection of the existing versions
-	 *
-	 * @return \LukasBestle\Versions\Versions
 	 *
 	 * @throws \Kirby\Exception\Exception If the environment validation failed
 	 */
