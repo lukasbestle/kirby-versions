@@ -7,7 +7,6 @@ namespace LukasBestle\Versions;
  */
 class ChangesTest extends TestCase
 {
-	protected $changes;
 	protected $instance;
 
 	public function setUp(): void
@@ -20,16 +19,14 @@ class ChangesTest extends TestCase
 			'contentRoot' => $this->contentRoot1,
 			'plugin'      => $this->plugin
 		]);
-
-		$this->changes = new Changes($this->plugin, $this->instance);
 	}
 
 	public function testNoChanges()
 	{
-		$this->assertSame([], $this->changes->inIndex());
-		$this->assertSame([], $this->changes->inWorktree());
-		$this->assertSame([], $this->changes->lockFiles());
-		$this->assertSame([], $this->changes->overall());
+		$this->assertSame([], $this->changes()->inIndex());
+		$this->assertSame([], $this->changes()->inWorktree());
+		$this->assertSame([], $this->changes()->lockFiles());
+		$this->assertSame([], $this->changes()->overall());
 	}
 
 	public function testWithChanges()
@@ -65,16 +62,16 @@ class ChangesTest extends TestCase
 			'not-a.lock' => '+',
 			'removed' => '-',
 			'renamed -> renamed_new' => 'R'
-		], $this->changes->inIndex());
+		], $this->changes()->inIndex());
 		$this->assertSame([
 			'added_and_deleted' => '-',
 			'added_in_worktree' => '+',
 			'modified_in_worktree' => 'M'
-		], $this->changes->inWorktree());
+		], $this->changes()->inWorktree());
 		$this->assertSame([
 			'.lock',
 			'dir/.lock'
-		], $this->changes->lockFiles());
+		], $this->changes()->lockFiles());
 		$this->assertSame([
 			'added_in_worktree' => '+',
 			'dir/also-not-a.lock' => '+',
@@ -83,6 +80,11 @@ class ChangesTest extends TestCase
 			'not-a.lock' => '+',
 			'removed' => '-',
 			'renamed -> renamed_new' => 'R'
-		], $this->changes->overall());
+		], $this->changes()->overall());
+	}
+
+	protected function changes(): Changes
+	{
+		return new Changes($this->plugin, $this->instance);
 	}
 }

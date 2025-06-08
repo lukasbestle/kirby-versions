@@ -54,6 +54,9 @@ class Changes
 	{
 		$this->plugin   = $plugin;
 		$this->instance = $instance;
+
+		// initialize the remaining properties
+		$this->update();
 	}
 
 	/**
@@ -65,8 +68,6 @@ class Changes
 	 */
 	public function inIndex(): array
 	{
-		$this->initialize();
-
 		return $this->inIndex;
 	}
 
@@ -79,8 +80,6 @@ class Changes
 	 */
 	public function inWorktree(): array
 	{
-		$this->initialize();
-
 		return $this->inWorktree;
 	}
 
@@ -93,8 +92,6 @@ class Changes
 	 */
 	public function lockFiles(): array
 	{
-		$this->initialize();
-
 		return $this->lockFiles;
 	}
 
@@ -107,8 +104,6 @@ class Changes
 	 */
 	public function overall(): array
 	{
-		$this->initialize();
-
 		// let the worktree override the index because
 		// the worktree information is more recent
 		$merged = array_merge($this->inIndex, $this->inWorktree);
@@ -184,21 +179,6 @@ class Changes
 		ksort($this->inIndex);
 		ksort($this->inWorktree);
 		sort($this->lockFiles);
-	}
-
-	/**
-	 * Loads the current changes if this instance
-	 * is still in its initial state
-	 */
-	protected function initialize(): void
-	{
-		if (
-			isset($this->inIndex) === false ||
-			isset($this->inWorktree) === false ||
-			isset($this->lockFiles) === false
-		) {
-			$this->update();
-		}
 	}
 
 	/**
